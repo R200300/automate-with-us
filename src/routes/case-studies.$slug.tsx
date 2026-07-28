@@ -68,7 +68,7 @@ function CaseStudyDetail() {
 
       <Section muted className="py-12">
         <div className="grid gap-4 sm:grid-cols-3">
-          {study.results.map((r) => (
+          {study.results.map((r: { value: string; label: string }) => (
             <div key={r.label} className="surface-card p-6 text-center">
               <p className="font-display text-3xl font-bold text-primary">{r.value}</p>
               <p className="mt-1.5 text-sm text-muted-foreground">{r.label}</p>
@@ -89,7 +89,7 @@ function CaseStudyDetail() {
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{study.solution}</p>
             <p className="mt-5 text-xs font-semibold tracking-wide text-primary uppercase">{study.timeline}</p>
             <div className="mt-3 flex flex-wrap gap-2">
-              {study.stack.map((tool) => (
+              {study.stack.map((tool: string) => (
                 <span key={tool} className="rounded-full bg-surface px-3 py-1 text-xs text-muted-foreground">
                   {tool}
                 </span>
@@ -102,7 +102,7 @@ function CaseStudyDetail() {
       <Section muted>
         <SectionHeading eyebrow="Outcomes" title="What changed day to day" />
         <ul className="mx-auto mt-12 grid max-w-4xl gap-4 sm:grid-cols-2">
-          {study.outcomes.map((o) => (
+          {study.outcomes.map((o: string) => (
             <li key={o} className="surface-card flex items-start gap-3 p-5">
               <Check className="mt-0.5 size-5 shrink-0 text-accent" />
               <span className="text-sm leading-relaxed text-muted-foreground">{o}</span>
