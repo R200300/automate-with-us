@@ -3,7 +3,7 @@ import confetti from "canvas-confetti";
 import { CalendarCheck, Home, PartyPopper } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
 
 type Props = {
   open: boolean;
@@ -55,13 +55,13 @@ export function BookingSuccessModal({ open, onOpenChange }: Props) {
           <span className="mx-auto inline-flex size-14 items-center justify-center rounded-full bg-accent/20 text-accent">
             <PartyPopper className="size-7" />
           </span>
-          <h2 className="mt-4 text-2xl font-bold text-balance">
+          <DialogTitle className="mt-4 text-2xl font-bold text-balance">
             🎉 Consultation Request Submitted!
-          </h2>
-          <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+          </DialogTitle>
+          <DialogDescription className="mt-3 text-sm leading-relaxed text-muted-foreground">
             Thank you for contacting Nexora Automation. We've received your consultation request
             successfully. Our team will review your requirements and contact you within 24 hours.
-          </p>
+          </DialogDescription>
         </div>
 
         <div className="px-8 pt-6 pb-8 text-left">
