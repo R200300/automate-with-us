@@ -1,4 +1,5 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { ArrowRight } from "lucide-react";
 import {
   FaqSection,
   FinalCta,
@@ -107,6 +108,14 @@ function CaseStudiesPage() {
               <blockquote className="mt-6 border-l-2 border-accent pl-4 text-sm leading-relaxed text-muted-foreground italic">
                 “{cs.quote}”
               </blockquote>
+              <Link
+                to="/case-studies/$slug"
+                params={{ slug: cs.slug }}
+                className="group mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-primary"
+              >
+                Read the full case study
+                <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
+              </Link>
             </article>
           ))}
         </div>
