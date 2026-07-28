@@ -1,6 +1,17 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useServerFn } from "@tanstack/react-start";
 import { useState } from "react";
-import { CalendarCheck, Check, Clock, ShieldCheck, Video } from "lucide-react";
+import { AlertTriangle, CalendarCheck, Check, Clock, Loader2, ShieldCheck, Video } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { BookingSuccessModal } from "@/components/booking-success-modal";
+import { submitConsultationRequest } from "@/lib/leads.functions";
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -52,8 +63,51 @@ const bookFaqs = [
   { q: "What happens after?", a: "You receive a short written plan with scope, timeline, and a fixed price. Say yes or say no — both are fine." },
 ];
 
+const emptyForm = {
+  fullName: "",
+  email: "",
+  phone: "",
+  country: "United States",
+  service: services[0].title,
+  notes: "",
+};
+
 function BookPage() {
-  const [sent, setSent] = useState(false);
+  const submitRequest = useServerFn(submitConsultationRequest);
+  const [form, setForm] = useState(emptyForm);
+  const [submitting, setSubmitting] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const update = (key: keyof typeof emptyForm) => (value: string) =>
+    setForm((prev) => ({ ...prev, [key]: value }));
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (submitting) return;
+
+    const fullName = form.fullName.trim();
+    const email = form.email.trim();
+    if (fullName.length < 2) return setError("Please enter your full name (at least 2 characters).");
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email))
+      return setError("Please enter a valid work email address.");
+
+    setSubmitting(true);
+    setError(null);
+    try {
+      await submitRequest({ data: { ...form, fullName, email } });
+      setForm(emptyForm);
+      setSuccess(true);
+    } catch (err) {
+      setError(
+        err instanceof Error && err.message
+          ? err.message
+          : "Something went wrong while sending your request. Please try again or email hello@nexoraautomation.com.",
+      );
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
   return (
     <>
@@ -100,13 +154,7 @@ function BookPage() {
             </div>
           </div>
 
-          <form
-            className="surface-card p-8"
-            onSubmit={(e) => {
-              e.preventDefault();
-              setSent(true);
-            }}
-          >
+          <form className="surface-card p-8" onSubmit={handleSubmit} noValidate>
             <h2 className="text-xl font-semibold">Request your free slot</h2>
             <p className="mt-1.5 text-sm text-muted-foreground">
               Fill this in and we will send you three time options within a few hours.
@@ -115,22 +163,41 @@ function BookPage() {
             <div className="mt-6 grid gap-5 sm:grid-cols-2">
               <div className="grid gap-2">
                 <Label htmlFor="b-name">Full name</Label>
-                <Input id="b-name" placeholder="Jane Miller" required />
+                <Input
+                  id="b-name"
+                  placeholder="Jane Miller"
+                  required
+                  value={form.fullName}
+                  onChange={(e) => update("fullName")(e.target.value)}
+                />
               </div>
               <div className="grid gap-2">
                 <Label htmlFor="b-email">Work email</Label>
-                <Input id="b-email" type="email" placeholder="jane@company.com" required />
+                <Input
+                  id="b-email"
+                  type="email"
+                  placeholder="jane@company.com"
+                  required
+                  value={form.email}
+                  onChange={(e) => update("email")(e.target.value)}
+                />
               </div>
               <div className="grid gap-2">
                 <Label htmlFor="b-phone">Phone / WhatsApp</Label>
-                <Input id="b-phone" placeholder="+1 555 123 4567" />
+                <Input
+                  id="b-phone"
+                  placeholder="+1 555 123 4567"
+                  value={form.phone}
+                  onChange={(e) => update("phone")(e.target.value)}
+                />
               </div>
               <div className="grid gap-2">
                 <Label htmlFor="b-country">Country</Label>
                 <select
                   id="b-country"
                   className="h-9 w-full rounded-md border border-input bg-transparent px-3 text-sm shadow-xs outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
-                  defaultValue="United States"
+                  value={form.country}
+                  onChange={(e) => update("country")(e.target.value)}
                 >
                   {["United States", "Canada", "United Kingdom", "Australia", "Other"].map((c) => (
                     <option key={c} value={c}>
@@ -144,7 +211,8 @@ function BookPage() {
                 <select
                   id="b-service"
                   className="h-9 w-full rounded-md border border-input bg-transparent px-3 text-sm shadow-xs outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
-                  defaultValue={services[0].title}
+                  value={form.service}
+                  onChange={(e) => update("service")(e.target.value)}
                 >
                   {services.map((s) => (
                     <option key={s.slug} value={s.title}>
@@ -160,25 +228,48 @@ function BookPage() {
                   id="b-notes"
                   rows={4}
                   placeholder="We get about 60 calls a week and miss a third of them..."
+                  value={form.notes}
+                  onChange={(e) => update("notes")(e.target.value)}
                 />
               </div>
             </div>
 
-            <Button type="submit" size="lg" className="mt-6 w-full rounded-full">
-              Book My Free Consultation
+            <Button type="submit" size="lg" className="mt-6 w-full rounded-full" disabled={submitting}>
+              {submitting ? (
+                <>
+                  <Loader2 className="size-4 animate-spin" /> Sending your request...
+                </>
+              ) : (
+                "Book My Free Consultation"
+              )}
             </Button>
             <p className="mt-3 text-center text-xs text-muted-foreground">
               Free · No obligation · We reply within 24 hours
             </p>
-
-            {sent && (
-              <p className="mt-5 rounded-xl bg-accent/15 p-4 text-center text-sm font-medium text-accent-foreground">
-                You're on the list! Check your inbox — we will send three time options shortly.
-              </p>
-            )}
           </form>
         </div>
       </section>
+
+      <BookingSuccessModal open={success} onOpenChange={setSuccess} />
+
+      <Dialog open={Boolean(error)} onOpenChange={(open) => !open && setError(null)}>
+        <DialogContent className="max-w-md rounded-2xl">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2 text-destructive">
+              <AlertTriangle className="size-5" /> We couldn't submit your request
+            </DialogTitle>
+            <DialogDescription className="pt-1 text-sm">{error}</DialogDescription>
+          </DialogHeader>
+          <p className="text-xs text-muted-foreground">
+            Your details are still in the form — nothing was lost. Fix the issue above and try again,
+            or email hello@nexoraautomation.com.
+          </p>
+          <Button className="rounded-full" onClick={() => setError(null)}>
+            Try Again
+          </Button>
+        </DialogContent>
+      </Dialog>
+
 
       <Section muted className="py-12">
         <TrustBadges items={trustBadges} />
