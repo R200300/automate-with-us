@@ -388,6 +388,7 @@ export const posts = [
 
 export const caseStudies = [
   {
+    slug: "reeves-plumbing",
     client: "Reeves Plumbing",
     industry: "Home Services · Austin, USA",
     challenge:
@@ -403,6 +404,7 @@ export const caseStudies = [
       "We stopped losing after-hours work overnight. It paid for itself in two weeks.",
   },
   {
+    slug: "carter-dental",
     client: "Carter Dental",
     industry: "Healthcare · Sydney, Australia",
     challenge:
@@ -417,6 +419,7 @@ export const caseStudies = [
     quote: "The front desk finally has time to look after patients in the room.",
   },
   {
+    slug: "whitfield-property",
     client: "Whitfield Property",
     industry: "Real Estate · Manchester, UK",
     challenge:
@@ -431,6 +434,7 @@ export const caseStudies = [
     quote: "Every lead gets a reply in seconds now. Our agents only speak to serious buyers.",
   },
   {
+    slug: "northline-retail",
     client: "Northline Retail",
     industry: "E-commerce · Toronto, Canada",
     challenge:
