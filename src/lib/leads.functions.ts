@@ -36,20 +36,8 @@ export const submitConsultationRequest = createServerFn({ method: "POST" })
       throw new Error(`We could not save your request: ${error.message}`);
     }
 
-    let emailSent = false;
-    try {
-      const mod = await import("@/lib/email-templates/send-email").catch(() => null);
-      if (mod && typeof mod.sendTemplateEmail === "function") {
-        const result = await mod.sendTemplateEmail("consultation-confirmation", data.email, {
-          templateData: { name: data.fullName, service: data.service || "AI automation" },
-          idempotencyKey: `consultation-confirmation-${row.id}`,
-        });
-        emailSent = Boolean(result?.sent);
-      }
-    } catch (emailError) {
-      // A failed confirmation email must never lose a captured lead.
-      console.error("[consultation] confirmation email failed", emailError);
-    }
+    // Confirmation email is wired up once a sender domain is verified for the
+    // project; the lead is already saved above either way.
+    return { id: row.id, emailSent: false };
 
-    return { id: row.id, emailSent };
   });
