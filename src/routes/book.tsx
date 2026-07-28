@@ -1,6 +1,17 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useServerFn } from "@tanstack/react-start";
 import { useState } from "react";
-import { CalendarCheck, Check, Clock, ShieldCheck, Video } from "lucide-react";
+import { AlertTriangle, CalendarCheck, Check, Clock, Loader2, ShieldCheck, Video } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { BookingSuccessModal } from "@/components/booking-success-modal";
+import { submitConsultationRequest } from "@/lib/leads.functions";
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
