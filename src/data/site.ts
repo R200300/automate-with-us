@@ -389,6 +389,15 @@ export const posts = [
 export const caseStudies = [
   {
     slug: "reeves-plumbing",
+    quoteAuthor: "Daniel Reeves, Owner",
+    timeline: "Live in 18 days",
+    stack: ["AI Voice Agent", "Dispatch calendar", "SMS follow-up", "CRM logging"],
+    outcomes: [
+      "Every call answered in under 2 seconds, day or night",
+      "Call-out fees quoted and confirmed before booking",
+      "Jobs land straight in the dispatch calendar with full notes",
+      "Owner gets a daily summary of booked and missed work",
+    ],
     client: "Reeves Plumbing",
     industry: "Home Services · Austin, USA",
     challenge:
@@ -405,6 +414,15 @@ export const caseStudies = [
   },
   {
     slug: "carter-dental",
+    quoteAuthor: "Dr. Liam Carter, Founder",
+    timeline: "Live in 3 weeks",
+    stack: ["WhatsApp automation", "SMS reminders", "Practice software", "Waitlist bot"],
+    outcomes: [
+      "Two-step reminders sent 48 hours and 2 hours before each visit",
+      "Patients reschedule with one tap instead of a phone call",
+      "Cancelled slots auto-offered to the waitlist within minutes",
+      "Front desk freed from repetitive reminder calls",
+    ],
     client: "Carter Dental",
     industry: "Healthcare · Sydney, Australia",
     challenge:
@@ -420,6 +438,15 @@ export const caseStudies = [
   },
   {
     slug: "whitfield-property",
+    quoteAuthor: "Emma Whitfield, Director",
+    timeline: "Live in 12 days",
+    stack: ["AI lead responder", "Viewing booking", "CRM automation", "Email nurture"],
+    outcomes: [
+      "Portal leads answered in about 90 seconds, 24/7",
+      "Buyers qualified on budget, timeline, and finance before agent contact",
+      "Viewings booked into the right agent's calendar automatically",
+      "Cold leads nurtured until they are ready to view",
+    ],
     client: "Whitfield Property",
     industry: "Real Estate · Manchester, UK",
     challenge:
@@ -435,6 +462,15 @@ export const caseStudies = [
   },
   {
     slug: "northline-retail",
+    quoteAuthor: "Priya Anand, Operations Head",
+    timeline: "Live in 4 weeks",
+    stack: ["AI support agent", "Shopify", "Returns portal", "Helpdesk escalation"],
+    outcomes: [
+      "Order status answered instantly from live Shopify data",
+      "Returns started and labels issued without an agent",
+      "Complex cases escalated with a full conversation summary",
+      "Support costs down while satisfaction went up",
+    ],
     client: "Northline Retail",
     industry: "E-commerce · Toronto, Canada",
     challenge:
