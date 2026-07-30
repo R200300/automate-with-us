@@ -54,8 +54,8 @@ export const submitLead = createServerFn({ method: "POST" })
       });
 
     if (error) {
-      console.error("[leads] insert failed", { key: key.slice(0, 12), url, error });
-      throw new Error(`We could not save your request: ${error.message} [dbg ${key.slice(0,14)} ${url} ${error.code} ${error.details} ${error.hint}]`);
+      console.error("[leads] insert failed", error);
+      throw new Error(`We could not save your request: ${error.message}`);
     }
 
     return { ok: true };
