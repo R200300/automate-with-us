@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useState } from "react";
 import { AlertTriangle, CalendarCheck, Check, Clock, Loader2, ShieldCheck, Video } from "lucide-react";
@@ -10,7 +10,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { BookingSuccessModal } from "@/components/booking-success-modal";
-import { submitConsultationRequest } from "@/lib/leads.functions";
+import { submitLead } from "@/lib/leads.functions";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -41,6 +41,8 @@ export const Route = createFileRoute("/book")({
         property: "og:description",
         content: "Free 30-minute discovery call with an AI automation expert. Walk away with a clear plan.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { property: "og:url", content: "/book" },
     ],
     links: [{ rel: "canonical", href: "/book" }],
@@ -63,40 +65,73 @@ const bookFaqs = [
   { q: "What happens after?", a: "You receive a short written plan with scope, timeline, and a fixed price. Say yes or say no — both are fine." },
 ];
 
+const countries = ["United States", "Canada", "United Kingdom", "Australia", "India", "Other"];
+
 const emptyForm = {
   fullName: "",
+  companyName: "",
   email: "",
   phone: "",
   country: "United States",
   service: services[0].title,
-  notes: "",
+  projectDescription: "",
 };
 
+type FormState = typeof emptyForm;
+type FieldErrors = Partial<Record<keyof FormState, string>>;
+
+function validate(form: FormState): FieldErrors {
+  const errors: FieldErrors = {};
+  if (form.fullName.trim().length < 2) errors.fullName = "Please enter your full name.";
+  if (form.companyName.trim().length < 2) errors.companyName = "Please enter your company name.";
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(form.email.trim()))
+    errors.email = "Please enter a valid work email address.";
+  if (form.phone.trim().replace(/[^\d]/g, "").length < 6)
+    errors.phone = "Please enter a valid phone number.";
+  if (!form.country.trim()) errors.country = "Please select your country.";
+  if (!form.service.trim()) errors.service = "Please select a service.";
+  if (form.projectDescription.trim().length < 10)
+    errors.projectDescription = "Tell us a little about your project (10+ characters).";
+  return errors;
+}
+
 function BookPage() {
-  const submitRequest = useServerFn(submitConsultationRequest);
-  const [form, setForm] = useState(emptyForm);
+  const submitRequest = useServerFn(submitLead);
+  const [form, setForm] = useState<FormState>(emptyForm);
+  const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const update = (key: keyof typeof emptyForm) => (value: string) =>
+  const update = (key: keyof FormState) => (value: string) => {
     setForm((prev) => ({ ...prev, [key]: value }));
+    setFieldErrors((prev) => ({ ...prev, [key]: undefined }));
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (submitting) return;
 
-    const fullName = form.fullName.trim();
-    const email = form.email.trim();
-    if (fullName.length < 2) return setError("Please enter your full name (at least 2 characters).");
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email))
-      return setError("Please enter a valid work email address.");
+    const errors = validate(form);
+    setFieldErrors(errors);
+    if (Object.keys(errors).length > 0) return;
 
     setSubmitting(true);
     setError(null);
     try {
-      await submitRequest({ data: { ...form, fullName, email } });
+      await submitRequest({
+        data: {
+          fullName: form.fullName.trim(),
+          companyName: form.companyName.trim(),
+          email: form.email.trim(),
+          phone: form.phone.trim(),
+          country: form.country.trim(),
+          service: form.service.trim(),
+          projectDescription: form.projectDescription.trim(),
+        },
+      });
       setForm(emptyForm);
+      setFieldErrors({});
       setSuccess(true);
     } catch (err) {
       setError(
@@ -108,6 +143,11 @@ function BookPage() {
       setSubmitting(false);
     }
   };
+
+  const fieldError = (key: keyof FormState) =>
+    fieldErrors[key] ? (
+      <p className="text-xs text-destructive">{fieldErrors[key]}</p>
+    ) : null;
 
   return (
     <>
@@ -162,52 +202,68 @@ function BookPage() {
 
             <div className="mt-6 grid gap-5 sm:grid-cols-2">
               <div className="grid gap-2">
-                <Label htmlFor="b-name">Full name</Label>
+                <Label htmlFor="b-name">Full name *</Label>
                 <Input
                   id="b-name"
                   placeholder="Jane Miller"
-                  required
                   value={form.fullName}
+                  aria-invalid={Boolean(fieldErrors.fullName)}
                   onChange={(e) => update("fullName")(e.target.value)}
                 />
+                {fieldError("fullName")}
               </div>
               <div className="grid gap-2">
-                <Label htmlFor="b-email">Work email</Label>
+                <Label htmlFor="b-company">Company name *</Label>
+                <Input
+                  id="b-company"
+                  placeholder="Miller Plumbing Co."
+                  value={form.companyName}
+                  aria-invalid={Boolean(fieldErrors.companyName)}
+                  onChange={(e) => update("companyName")(e.target.value)}
+                />
+                {fieldError("companyName")}
+              </div>
+              <div className="grid gap-2">
+                <Label htmlFor="b-email">Work email *</Label>
                 <Input
                   id="b-email"
                   type="email"
                   placeholder="jane@company.com"
-                  required
                   value={form.email}
+                  aria-invalid={Boolean(fieldErrors.email)}
                   onChange={(e) => update("email")(e.target.value)}
                 />
+                {fieldError("email")}
               </div>
               <div className="grid gap-2">
-                <Label htmlFor="b-phone">Phone / WhatsApp</Label>
+                <Label htmlFor="b-phone">Phone / WhatsApp *</Label>
                 <Input
                   id="b-phone"
                   placeholder="+1 555 123 4567"
                   value={form.phone}
+                  aria-invalid={Boolean(fieldErrors.phone)}
                   onChange={(e) => update("phone")(e.target.value)}
                 />
+                {fieldError("phone")}
               </div>
               <div className="grid gap-2">
-                <Label htmlFor="b-country">Country</Label>
+                <Label htmlFor="b-country">Country *</Label>
                 <select
                   id="b-country"
                   className="h-9 w-full rounded-md border border-input bg-transparent px-3 text-sm shadow-xs outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
                   value={form.country}
                   onChange={(e) => update("country")(e.target.value)}
                 >
-                  {["United States", "Canada", "United Kingdom", "Australia", "Other"].map((c) => (
+                  {countries.map((c) => (
                     <option key={c} value={c}>
                       {c}
                     </option>
                   ))}
                 </select>
+                {fieldError("country")}
               </div>
-              <div className="grid gap-2 sm:col-span-2">
-                <Label htmlFor="b-service">What do you want to automate?</Label>
+              <div className="grid gap-2">
+                <Label htmlFor="b-service">Service you need *</Label>
                 <select
                   id="b-service"
                   className="h-9 w-full rounded-md border border-input bg-transparent px-3 text-sm shadow-xs outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
@@ -221,16 +277,19 @@ function BookPage() {
                   ))}
                   <option value="Not sure yet">Not sure yet — help me decide</option>
                 </select>
+                {fieldError("service")}
               </div>
               <div className="grid gap-2 sm:col-span-2">
-                <Label htmlFor="b-notes">Anything we should know?</Label>
+                <Label htmlFor="b-notes">Project description *</Label>
                 <Textarea
                   id="b-notes"
                   rows={4}
                   placeholder="We get about 60 calls a week and miss a third of them..."
-                  value={form.notes}
-                  onChange={(e) => update("notes")(e.target.value)}
+                  value={form.projectDescription}
+                  aria-invalid={Boolean(fieldErrors.projectDescription)}
+                  onChange={(e) => update("projectDescription")(e.target.value)}
                 />
+                {fieldError("projectDescription")}
               </div>
             </div>
 
@@ -270,7 +329,6 @@ function BookPage() {
         </DialogContent>
       </Dialog>
 
-
       <Section muted className="py-12">
         <TrustBadges items={trustBadges} />
       </Section>
@@ -299,6 +357,9 @@ function BookPage() {
       <Section muted>
         <SectionHeading eyebrow="FAQ" title="About the free consultation" />
         <FaqSection items={bookFaqs} />
+        <p className="mt-8 text-center text-xs text-muted-foreground">
+          Team member? <Link to="/admin/leads" className="underline">Open the leads dashboard</Link>
+        </p>
       </Section>
     </>
   );
