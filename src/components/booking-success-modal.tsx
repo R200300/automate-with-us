@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import confetti from "canvas-confetti";
-import { CalendarCheck, Home, PartyPopper } from "lucide-react";
+import { Home, PartyPopper, RotateCcw } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
@@ -56,10 +56,10 @@ export function BookingSuccessModal({ open, onOpenChange }: Props) {
             <PartyPopper className="size-7" />
           </span>
           <DialogTitle className="mt-4 text-2xl font-bold text-balance">
-            🎉 Consultation Request Submitted!
+            🎉 Consultation Request Submitted
           </DialogTitle>
           <DialogDescription className="mt-3 text-sm leading-relaxed text-muted-foreground">
-            Thank you for contacting Nexora Automation. We've received your consultation request
+            Thank you for choosing Nexora Automation. We've received your consultation request
             successfully. Our team will review your requirements and contact you within 24 hours.
           </DialogDescription>
         </div>
@@ -79,14 +79,17 @@ export function BookingSuccessModal({ open, onOpenChange }: Props) {
 
           <div className="mt-7 flex flex-col gap-3 sm:flex-row">
             <Button asChild size="lg" className="flex-1 rounded-full">
-              <a href="https://calendly.com" target="_blank" rel="noreferrer">
-                <CalendarCheck className="size-4" /> Book Meeting Now
-              </a>
-            </Button>
-            <Button asChild size="lg" variant="outline" className="flex-1 rounded-full">
               <Link to="/" onClick={() => onOpenChange(false)}>
-                <Home className="size-4" /> Back to Home
+                <Home className="size-4" /> Return Home
               </Link>
+            </Button>
+            <Button
+              size="lg"
+              variant="outline"
+              className="flex-1 rounded-full"
+              onClick={() => onOpenChange(false)}
+            >
+              <RotateCcw className="size-4" /> Book Another Consultation
             </Button>
           </div>
         </div>
