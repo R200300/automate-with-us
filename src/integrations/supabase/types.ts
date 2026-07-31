@@ -14,51 +14,125 @@ export type Database = {
   }
   public: {
     Tables: {
+      lead_activity: {
+        Row: {
+          actor: string | null
+          created_at: string
+          event_type: string
+          id: string
+          lead_id: string
+          message: string
+          metadata: Json
+        }
+        Insert: {
+          actor?: string | null
+          created_at?: string
+          event_type: string
+          id?: string
+          lead_id: string
+          message: string
+          metadata?: Json
+        }
+        Update: {
+          actor?: string | null
+          created_at?: string
+          event_type?: string
+          id?: string
+          lead_id?: string
+          message?: string
+          metadata?: Json
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lead_activity_lead_id_fkey"
+            columns: ["lead_id"]
+            isOneToOne: false
+            referencedRelation: "leads"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       leads: {
         Row: {
           assigned_to: string | null
+          calendar_error: string | null
+          calendar_event_id: string | null
+          calendar_event_link: string | null
+          calendar_status: string
           company_name: string
           country: string
           created_at: string
+          customer_email_attempts: number
+          customer_email_error: string | null
+          customer_email_status: string
           email: string
           full_name: string
           id: string
           lead_status: string
           notes: string | null
+          owner_email_attempts: number
+          owner_email_error: string | null
+          owner_email_status: string
           phone: string
           project_description: string
+          scheduled_at: string | null
+          seen_at: string | null
           service: string
           source: string
           updated_at: string
         }
         Insert: {
           assigned_to?: string | null
+          calendar_error?: string | null
+          calendar_event_id?: string | null
+          calendar_event_link?: string | null
+          calendar_status?: string
           company_name: string
           country: string
           created_at?: string
+          customer_email_attempts?: number
+          customer_email_error?: string | null
+          customer_email_status?: string
           email: string
           full_name: string
           id?: string
           lead_status?: string
           notes?: string | null
+          owner_email_attempts?: number
+          owner_email_error?: string | null
+          owner_email_status?: string
           phone: string
           project_description: string
+          scheduled_at?: string | null
+          seen_at?: string | null
           service: string
           source?: string
           updated_at?: string
         }
         Update: {
           assigned_to?: string | null
+          calendar_error?: string | null
+          calendar_event_id?: string | null
+          calendar_event_link?: string | null
+          calendar_status?: string
           company_name?: string
           country?: string
           created_at?: string
+          customer_email_attempts?: number
+          customer_email_error?: string | null
+          customer_email_status?: string
           email?: string
           full_name?: string
           id?: string
           lead_status?: string
           notes?: string | null
+          owner_email_attempts?: number
+          owner_email_error?: string | null
+          owner_email_status?: string
           phone?: string
           project_description?: string
+          scheduled_at?: string | null
+          seen_at?: string | null
           service?: string
           source?: string
           updated_at?: string
