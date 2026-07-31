@@ -1,7 +1,5 @@
 import { createServerFn } from "@tanstack/react-start";
-import { createClient } from "@supabase/supabase-js";
 import { z } from "zod";
-import type { Database } from "@/integrations/supabase/types";
 
 const leadSchema = z.object({
   fullName: z.string().trim().min(2, "Please enter your full name").max(100),
@@ -22,24 +20,9 @@ export type LeadInput = z.infer<typeof leadSchema>;
 export const submitLead = createServerFn({ method: "POST" })
   .inputValidator((data: LeadInput) => leadSchema.parse(data))
   .handler(async ({ data }) => {
-    const url = process.env.SUPABASE_URL!;
-    const key = process.env.SUPABASE_PUBLISHABLE_KEY!;
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
 
-    const supabase = createClient<Database>(url, key, {
-      auth: { storage: undefined, persistSession: false, autoRefreshToken: false },
-      global: {
-        fetch: (input, init) => {
-          const headers = new Headers(init?.headers);
-          if (key.startsWith("sb_") && headers.get("Authorization") === `Bearer ${key}`) {
-            headers.delete("Authorization");
-          }
-          headers.set("apikey", key);
-          return fetch(input, { ...init, headers });
-        },
-      },
-    });
-
-    const { error } = await supabase
+    const { data: lead, error } = await supabaseAdmin
       .from("leads")
       .insert({
         full_name: data.fullName,
@@ -51,12 +34,28 @@ export const submitLead = createServerFn({ method: "POST" })
         project_description: data.projectDescription,
         source: "Website",
         lead_status: "New",
-      });
+      })
+      .select(
+        "id, full_name, company_name, email, phone, country, service, project_description, created_at",
+      )
+      .single();
 
-    if (error) {
+    if (error || !lead) {
       console.error("[leads] insert failed", error);
-      throw new Error(`We could not save your request: ${error.message}`);
+      throw new Error(`We could not save your request: ${error?.message ?? "unknown error"}`);
     }
 
-    return { ok: true };
+    // The lead is safely stored before any notification runs.
+    const { logActivity, dispatchLeadEmails } = await import("./lead-notifications.server");
+    await logActivity(lead.id, "lead_created", `Lead created from the website booking form (${lead.service}).`, {
+      source: "Website",
+    });
+
+    try {
+      await dispatchLeadEmails(lead);
+    } catch (notifyError) {
+      console.error("[leads] notification dispatch failed", notifyError);
+    }
+
+    return { ok: true, leadId: lead.id };
   });
