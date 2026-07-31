@@ -16,14 +16,13 @@ export type LeadStatus = (typeof LEAD_STATUSES)[number];
 const LEAD_COLUMNS =
   "id, created_at, full_name, company_name, email, phone, country, service, project_description, lead_status, source, notes, seen_at, customer_email_status, customer_email_error, owner_email_status, owner_email_error, scheduled_at, calendar_event_link, calendar_status, calendar_error";
 
-async function assertAdmin(context: { supabase: ReturnType<typeof Object> ; userId: string }) {
-  const supabase = context.supabase as never as {
-    rpc: (fn: string, args: Record<string, unknown>) => Promise<{ data: boolean | null; error: unknown }>;
-  };
-  const { data } = await supabase.rpc("has_role", {
+type AuthContext = { supabase: { rpc: (fn: never, args: never) => Promise<{ data: unknown }> }; userId: string };
+
+async function assertAdmin(context: AuthContext) {
+  const { data } = await context.supabase.rpc("has_role" as never, {
     _user_id: context.userId,
     _role: "admin",
-  });
+  } as never);
   if (!data) throw new Error("You need an admin role to manage leads.");
 }
 
