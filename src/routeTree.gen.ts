@@ -23,6 +23,8 @@ import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CaseStudiesSlugRouteImport } from './routes/case-studies.$slug'
 import { Route as AuthenticatedAdminLeadsRouteImport } from './routes/_authenticated/admin.leads'
+import { Route as AuthenticatedAdminCrmRouteImport } from './routes/_authenticated/admin.crm'
+import { Route as AuthenticatedAdminLeadLeadIdRouteImport } from './routes/_authenticated/admin.lead.$leadId'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
@@ -93,6 +95,17 @@ const AuthenticatedAdminLeadsRoute = AuthenticatedAdminLeadsRouteImport.update({
   path: '/admin/leads',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedAdminCrmRoute = AuthenticatedAdminCrmRouteImport.update({
+  id: '/admin/crm',
+  path: '/admin/crm',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedAdminLeadLeadIdRoute =
+  AuthenticatedAdminLeadLeadIdRouteImport.update({
+    id: '/admin/lead/$leadId',
+    path: '/admin/lead/$leadId',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -107,7 +120,9 @@ export interface FileRoutesByFullPath {
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/case-studies/$slug': typeof CaseStudiesSlugRoute
+  '/admin/crm': typeof AuthenticatedAdminCrmRoute
   '/admin/leads': typeof AuthenticatedAdminLeadsRoute
+  '/admin/lead/$leadId': typeof AuthenticatedAdminLeadLeadIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -122,7 +137,9 @@ export interface FileRoutesByTo {
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/case-studies/$slug': typeof CaseStudiesSlugRoute
+  '/admin/crm': typeof AuthenticatedAdminCrmRoute
   '/admin/leads': typeof AuthenticatedAdminLeadsRoute
+  '/admin/lead/$leadId': typeof AuthenticatedAdminLeadLeadIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -139,7 +156,9 @@ export interface FileRoutesById {
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/case-studies/$slug': typeof CaseStudiesSlugRoute
+  '/_authenticated/admin/crm': typeof AuthenticatedAdminCrmRoute
   '/_authenticated/admin/leads': typeof AuthenticatedAdminLeadsRoute
+  '/_authenticated/admin/lead/$leadId': typeof AuthenticatedAdminLeadLeadIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -156,7 +175,9 @@ export interface FileRouteTypes {
     | '/services'
     | '/sitemap.xml'
     | '/case-studies/$slug'
+    | '/admin/crm'
     | '/admin/leads'
+    | '/admin/lead/$leadId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -171,7 +192,9 @@ export interface FileRouteTypes {
     | '/services'
     | '/sitemap.xml'
     | '/case-studies/$slug'
+    | '/admin/crm'
     | '/admin/leads'
+    | '/admin/lead/$leadId'
   id:
     | '__root__'
     | '/'
@@ -187,7 +210,9 @@ export interface FileRouteTypes {
     | '/services'
     | '/sitemap.xml'
     | '/case-studies/$slug'
+    | '/_authenticated/admin/crm'
     | '/_authenticated/admin/leads'
+    | '/_authenticated/admin/lead/$leadId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -305,15 +330,33 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminLeadsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/admin/crm': {
+      id: '/_authenticated/admin/crm'
+      path: '/admin/crm'
+      fullPath: '/admin/crm'
+      preLoaderRoute: typeof AuthenticatedAdminCrmRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/admin/lead/$leadId': {
+      id: '/_authenticated/admin/lead/$leadId'
+      path: '/admin/lead/$leadId'
+      fullPath: '/admin/lead/$leadId'
+      preLoaderRoute: typeof AuthenticatedAdminLeadLeadIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAdminCrmRoute: typeof AuthenticatedAdminCrmRoute
   AuthenticatedAdminLeadsRoute: typeof AuthenticatedAdminLeadsRoute
+  AuthenticatedAdminLeadLeadIdRoute: typeof AuthenticatedAdminLeadLeadIdRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAdminCrmRoute: AuthenticatedAdminCrmRoute,
   AuthenticatedAdminLeadsRoute: AuthenticatedAdminLeadsRoute,
+  AuthenticatedAdminLeadLeadIdRoute: AuthenticatedAdminLeadLeadIdRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =

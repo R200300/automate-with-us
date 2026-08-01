@@ -1,4 +1,4 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { useState } from "react";
@@ -119,7 +119,11 @@ function AdminLeadsPage() {
           </p>
         </div>
         <div className="flex flex-wrap gap-2">
+          <Button asChild className="rounded-full">
+            <Link to="/admin/crm">Open CRM pipeline</Link>
+          </Button>
           {unreadCount > 0 && (
+
             <Button
               variant="outline"
               className="rounded-full"
@@ -192,7 +196,14 @@ function AdminLeadsPage() {
                 <tr key={lead.id} className="border-b border-border/60 last:border-0">
                   <td className="px-4 py-3 font-medium">
                     <div className="flex items-center gap-2">
-                      {lead.full_name}
+                      <Link
+                        to="/admin/lead/$leadId"
+                        params={{ leadId: lead.id }}
+                        className="hover:text-primary hover:underline"
+                      >
+                        {lead.full_name}
+                      </Link>
+
                       {!lead.seen_at && (
                         <span className="inline-flex rounded-full bg-accent px-2 py-0.5 text-[10px] font-bold tracking-wide text-white uppercase">
                           New
