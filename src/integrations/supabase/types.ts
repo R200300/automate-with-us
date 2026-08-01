@@ -55,89 +55,213 @@ export type Database = {
       leads: {
         Row: {
           assigned_to: string | null
+          assigned_user: string | null
           calendar_error: string | null
           calendar_event_id: string | null
           calendar_event_link: string | null
           calendar_status: string
+          closing_probability: number
           company_name: string
+          company_size: string | null
           country: string
           created_at: string
+          created_by: string | null
           customer_email_attempts: number
           customer_email_error: string | null
           customer_email_status: string
           email: string
+          estimated_value: number
           full_name: string
           id: string
+          industry: string | null
+          last_contact: string | null
+          lead_source: string
           lead_status: string
+          meeting_date: string | null
+          meeting_link: string | null
+          next_followup: string | null
           notes: string | null
           owner_email_attempts: number
           owner_email_error: string | null
           owner_email_status: string
           phone: string
+          pipeline_stage: Database["public"]["Enums"]["pipeline_stage"]
+          priority: Database["public"]["Enums"]["lead_priority"]
           project_description: string
           scheduled_at: string | null
           seen_at: string | null
           service: string
           source: string
+          timezone: string | null
           updated_at: string
+          website: string | null
         }
         Insert: {
           assigned_to?: string | null
+          assigned_user?: string | null
           calendar_error?: string | null
           calendar_event_id?: string | null
           calendar_event_link?: string | null
           calendar_status?: string
+          closing_probability?: number
           company_name: string
+          company_size?: string | null
           country: string
           created_at?: string
+          created_by?: string | null
           customer_email_attempts?: number
           customer_email_error?: string | null
           customer_email_status?: string
           email: string
+          estimated_value?: number
           full_name: string
           id?: string
+          industry?: string | null
+          last_contact?: string | null
+          lead_source?: string
           lead_status?: string
+          meeting_date?: string | null
+          meeting_link?: string | null
+          next_followup?: string | null
           notes?: string | null
           owner_email_attempts?: number
           owner_email_error?: string | null
           owner_email_status?: string
           phone: string
+          pipeline_stage?: Database["public"]["Enums"]["pipeline_stage"]
+          priority?: Database["public"]["Enums"]["lead_priority"]
           project_description: string
           scheduled_at?: string | null
           seen_at?: string | null
           service: string
           source?: string
+          timezone?: string | null
           updated_at?: string
+          website?: string | null
         }
         Update: {
           assigned_to?: string | null
+          assigned_user?: string | null
           calendar_error?: string | null
           calendar_event_id?: string | null
           calendar_event_link?: string | null
           calendar_status?: string
+          closing_probability?: number
           company_name?: string
+          company_size?: string | null
           country?: string
           created_at?: string
+          created_by?: string | null
           customer_email_attempts?: number
           customer_email_error?: string | null
           customer_email_status?: string
           email?: string
+          estimated_value?: number
           full_name?: string
           id?: string
+          industry?: string | null
+          last_contact?: string | null
+          lead_source?: string
           lead_status?: string
+          meeting_date?: string | null
+          meeting_link?: string | null
+          next_followup?: string | null
           notes?: string | null
           owner_email_attempts?: number
           owner_email_error?: string | null
           owner_email_status?: string
           phone?: string
+          pipeline_stage?: Database["public"]["Enums"]["pipeline_stage"]
+          priority?: Database["public"]["Enums"]["lead_priority"]
           project_description?: string
           scheduled_at?: string | null
           seen_at?: string | null
           service?: string
           source?: string
+          timezone?: string | null
           updated_at?: string
+          website?: string | null
         }
         Relationships: []
+      }
+      notes: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          id: string
+          lead_id: string
+          note: string
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          lead_id: string
+          note: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          lead_id?: string
+          note?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "notes_lead_id_fkey"
+            columns: ["lead_id"]
+            isOneToOne: false
+            referencedRelation: "leads"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      tasks: {
+        Row: {
+          assigned_to: string | null
+          created_at: string
+          description: string | null
+          due_date: string | null
+          id: string
+          lead_id: string
+          priority: Database["public"]["Enums"]["lead_priority"]
+          status: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          assigned_to?: string | null
+          created_at?: string
+          description?: string | null
+          due_date?: string | null
+          id?: string
+          lead_id: string
+          priority?: Database["public"]["Enums"]["lead_priority"]
+          status?: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          assigned_to?: string | null
+          created_at?: string
+          description?: string | null
+          due_date?: string | null
+          id?: string
+          lead_id?: string
+          priority?: Database["public"]["Enums"]["lead_priority"]
+          status?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tasks_lead_id_fkey"
+            columns: ["lead_id"]
+            isOneToOne: false
+            referencedRelation: "leads"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       user_roles: {
         Row: {
@@ -165,6 +289,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      can_access_lead: { Args: { _lead_id: string }; Returns: boolean }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
@@ -175,6 +300,16 @@ export type Database = {
     }
     Enums: {
       app_role: "admin" | "moderator" | "user"
+      lead_priority: "Low" | "Medium" | "High" | "Urgent"
+      pipeline_stage:
+        | "New"
+        | "Contacted"
+        | "Discovery Scheduled"
+        | "Qualified"
+        | "Proposal Sent"
+        | "Negotiation"
+        | "Won"
+        | "Lost"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -303,6 +438,17 @@ export const Constants = {
   public: {
     Enums: {
       app_role: ["admin", "moderator", "user"],
+      lead_priority: ["Low", "Medium", "High", "Urgent"],
+      pipeline_stage: [
+        "New",
+        "Contacted",
+        "Discovery Scheduled",
+        "Qualified",
+        "Proposal Sent",
+        "Negotiation",
+        "Won",
+        "Lost",
+      ],
     },
   },
 } as const
