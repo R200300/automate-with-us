@@ -56,9 +56,13 @@ export function SiteHeader() {
 
         <div className="flex items-center gap-2">
           <ThemeToggle />
+          <Button asChild size="sm" variant="ghost" className="hidden rounded-full lg:inline-flex">
+            <Link to="/portal">Client Portal</Link>
+          </Button>
           <Button asChild size="sm" className="hidden rounded-full sm:inline-flex">
             <Link to="/book">Book Free Call</Link>
           </Button>
+
           <button
             type="button"
             aria-label="Toggle menu"

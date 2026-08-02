@@ -26,6 +26,7 @@ import { Route as CaseStudiesSlugRouteImport } from './routes/case-studies.$slug
 import { Route as AuthenticatedPortalIndexRouteImport } from './routes/_authenticated/portal.index'
 import { Route as AuthenticatedAdminLeadsRouteImport } from './routes/_authenticated/admin.leads'
 import { Route as AuthenticatedAdminCrmRouteImport } from './routes/_authenticated/admin.crm'
+import { Route as AuthenticatedPortalProjectsProjectIdRouteImport } from './routes/_authenticated/portal.projects.$projectId'
 import { Route as AuthenticatedAdminLeadLeadIdRouteImport } from './routes/_authenticated/admin.lead.$leadId'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -113,6 +114,12 @@ const AuthenticatedAdminCrmRoute = AuthenticatedAdminCrmRouteImport.update({
   path: '/admin/crm',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedPortalProjectsProjectIdRoute =
+  AuthenticatedPortalProjectsProjectIdRouteImport.update({
+    id: '/portal/projects/$projectId',
+    path: '/portal/projects/$projectId',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedAdminLeadLeadIdRoute =
   AuthenticatedAdminLeadLeadIdRouteImport.update({
     id: '/admin/lead/$leadId',
@@ -138,6 +145,7 @@ export interface FileRoutesByFullPath {
   '/admin/leads': typeof AuthenticatedAdminLeadsRoute
   '/portal/': typeof AuthenticatedPortalIndexRoute
   '/admin/lead/$leadId': typeof AuthenticatedAdminLeadLeadIdRoute
+  '/portal/projects/$projectId': typeof AuthenticatedPortalProjectsProjectIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -157,6 +165,7 @@ export interface FileRoutesByTo {
   '/admin/leads': typeof AuthenticatedAdminLeadsRoute
   '/portal': typeof AuthenticatedPortalIndexRoute
   '/admin/lead/$leadId': typeof AuthenticatedAdminLeadLeadIdRoute
+  '/portal/projects/$projectId': typeof AuthenticatedPortalProjectsProjectIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -178,6 +187,7 @@ export interface FileRoutesById {
   '/_authenticated/admin/leads': typeof AuthenticatedAdminLeadsRoute
   '/_authenticated/portal/': typeof AuthenticatedPortalIndexRoute
   '/_authenticated/admin/lead/$leadId': typeof AuthenticatedAdminLeadLeadIdRoute
+  '/_authenticated/portal/projects/$projectId': typeof AuthenticatedPortalProjectsProjectIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -199,6 +209,7 @@ export interface FileRouteTypes {
     | '/admin/leads'
     | '/portal/'
     | '/admin/lead/$leadId'
+    | '/portal/projects/$projectId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -218,6 +229,7 @@ export interface FileRouteTypes {
     | '/admin/leads'
     | '/portal'
     | '/admin/lead/$leadId'
+    | '/portal/projects/$projectId'
   id:
     | '__root__'
     | '/'
@@ -238,6 +250,7 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/leads'
     | '/_authenticated/portal/'
     | '/_authenticated/admin/lead/$leadId'
+    | '/_authenticated/portal/projects/$projectId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -377,6 +390,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminCrmRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/portal/projects/$projectId': {
+      id: '/_authenticated/portal/projects/$projectId'
+      path: '/portal/projects/$projectId'
+      fullPath: '/portal/projects/$projectId'
+      preLoaderRoute: typeof AuthenticatedPortalProjectsProjectIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/admin/lead/$leadId': {
       id: '/_authenticated/admin/lead/$leadId'
       path: '/admin/lead/$leadId'
@@ -392,6 +412,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedAdminLeadsRoute: typeof AuthenticatedAdminLeadsRoute
   AuthenticatedPortalIndexRoute: typeof AuthenticatedPortalIndexRoute
   AuthenticatedAdminLeadLeadIdRoute: typeof AuthenticatedAdminLeadLeadIdRoute
+  AuthenticatedPortalProjectsProjectIdRoute: typeof AuthenticatedPortalProjectsProjectIdRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
@@ -399,6 +420,8 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAdminLeadsRoute: AuthenticatedAdminLeadsRoute,
   AuthenticatedPortalIndexRoute: AuthenticatedPortalIndexRoute,
   AuthenticatedAdminLeadLeadIdRoute: AuthenticatedAdminLeadLeadIdRoute,
+  AuthenticatedPortalProjectsProjectIdRoute:
+    AuthenticatedPortalProjectsProjectIdRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
