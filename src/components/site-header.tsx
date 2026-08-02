@@ -89,11 +89,19 @@ export function SiteHeader() {
                 {item.label}
               </Link>
             ))}
+            <Link
+              to="/portal"
+              onClick={() => setOpen(false)}
+              className="rounded-xl px-3 py-2.5 text-sm font-medium text-muted-foreground hover:bg-secondary hover:text-foreground"
+            >
+              Client Portal
+            </Link>
             <Button asChild className="mt-2 rounded-full">
               <Link to="/book" onClick={() => setOpen(false)}>
                 Book a Free Consultation
               </Link>
             </Button>
+
           </nav>
         </div>
       )}
