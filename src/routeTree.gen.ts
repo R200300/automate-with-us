@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ServicesRouteImport } from './routes/services'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as IndustriesRouteImport } from './routes/industries'
 import { Route as ContactRouteImport } from './routes/contact'
@@ -22,8 +23,10 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CaseStudiesSlugRouteImport } from './routes/case-studies.$slug'
+import { Route as AuthenticatedPortalIndexRouteImport } from './routes/_authenticated/portal.index'
 import { Route as AuthenticatedAdminLeadsRouteImport } from './routes/_authenticated/admin.leads'
 import { Route as AuthenticatedAdminCrmRouteImport } from './routes/_authenticated/admin.crm'
+import { Route as AuthenticatedPortalProjectsProjectIdRouteImport } from './routes/_authenticated/portal.projects.$projectId'
 import { Route as AuthenticatedAdminLeadLeadIdRouteImport } from './routes/_authenticated/admin.lead.$leadId'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -34,6 +37,11 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
 const ServicesRoute = ServicesRouteImport.update({
   id: '/services',
   path: '/services',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PricingRoute = PricingRouteImport.update({
@@ -90,6 +98,12 @@ const CaseStudiesSlugRoute = CaseStudiesSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => CaseStudiesRoute,
 } as any)
+const AuthenticatedPortalIndexRoute =
+  AuthenticatedPortalIndexRouteImport.update({
+    id: '/portal/',
+    path: '/portal/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedAdminLeadsRoute = AuthenticatedAdminLeadsRouteImport.update({
   id: '/admin/leads',
   path: '/admin/leads',
@@ -100,6 +114,12 @@ const AuthenticatedAdminCrmRoute = AuthenticatedAdminCrmRouteImport.update({
   path: '/admin/crm',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedPortalProjectsProjectIdRoute =
+  AuthenticatedPortalProjectsProjectIdRouteImport.update({
+    id: '/portal/projects/$projectId',
+    path: '/portal/projects/$projectId',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedAdminLeadLeadIdRoute =
   AuthenticatedAdminLeadLeadIdRouteImport.update({
     id: '/admin/lead/$leadId',
@@ -117,12 +137,15 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/industries': typeof IndustriesRoute
   '/pricing': typeof PricingRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/case-studies/$slug': typeof CaseStudiesSlugRoute
   '/admin/crm': typeof AuthenticatedAdminCrmRoute
   '/admin/leads': typeof AuthenticatedAdminLeadsRoute
+  '/portal/': typeof AuthenticatedPortalIndexRoute
   '/admin/lead/$leadId': typeof AuthenticatedAdminLeadLeadIdRoute
+  '/portal/projects/$projectId': typeof AuthenticatedPortalProjectsProjectIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -134,12 +157,15 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/industries': typeof IndustriesRoute
   '/pricing': typeof PricingRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/case-studies/$slug': typeof CaseStudiesSlugRoute
   '/admin/crm': typeof AuthenticatedAdminCrmRoute
   '/admin/leads': typeof AuthenticatedAdminLeadsRoute
+  '/portal': typeof AuthenticatedPortalIndexRoute
   '/admin/lead/$leadId': typeof AuthenticatedAdminLeadLeadIdRoute
+  '/portal/projects/$projectId': typeof AuthenticatedPortalProjectsProjectIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -153,12 +179,15 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/industries': typeof IndustriesRoute
   '/pricing': typeof PricingRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/case-studies/$slug': typeof CaseStudiesSlugRoute
   '/_authenticated/admin/crm': typeof AuthenticatedAdminCrmRoute
   '/_authenticated/admin/leads': typeof AuthenticatedAdminLeadsRoute
+  '/_authenticated/portal/': typeof AuthenticatedPortalIndexRoute
   '/_authenticated/admin/lead/$leadId': typeof AuthenticatedAdminLeadLeadIdRoute
+  '/_authenticated/portal/projects/$projectId': typeof AuthenticatedPortalProjectsProjectIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -172,12 +201,15 @@ export interface FileRouteTypes {
     | '/contact'
     | '/industries'
     | '/pricing'
+    | '/reset-password'
     | '/services'
     | '/sitemap.xml'
     | '/case-studies/$slug'
     | '/admin/crm'
     | '/admin/leads'
+    | '/portal/'
     | '/admin/lead/$leadId'
+    | '/portal/projects/$projectId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -189,12 +221,15 @@ export interface FileRouteTypes {
     | '/contact'
     | '/industries'
     | '/pricing'
+    | '/reset-password'
     | '/services'
     | '/sitemap.xml'
     | '/case-studies/$slug'
     | '/admin/crm'
     | '/admin/leads'
+    | '/portal'
     | '/admin/lead/$leadId'
+    | '/portal/projects/$projectId'
   id:
     | '__root__'
     | '/'
@@ -207,12 +242,15 @@ export interface FileRouteTypes {
     | '/contact'
     | '/industries'
     | '/pricing'
+    | '/reset-password'
     | '/services'
     | '/sitemap.xml'
     | '/case-studies/$slug'
     | '/_authenticated/admin/crm'
     | '/_authenticated/admin/leads'
+    | '/_authenticated/portal/'
     | '/_authenticated/admin/lead/$leadId'
+    | '/_authenticated/portal/projects/$projectId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -226,6 +264,7 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   IndustriesRoute: typeof IndustriesRoute
   PricingRoute: typeof PricingRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
   ServicesRoute: typeof ServicesRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
 }
@@ -244,6 +283,13 @@ declare module '@tanstack/react-router' {
       path: '/services'
       fullPath: '/services'
       preLoaderRoute: typeof ServicesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/pricing': {
@@ -323,6 +369,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CaseStudiesSlugRouteImport
       parentRoute: typeof CaseStudiesRoute
     }
+    '/_authenticated/portal/': {
+      id: '/_authenticated/portal/'
+      path: '/portal'
+      fullPath: '/portal/'
+      preLoaderRoute: typeof AuthenticatedPortalIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/admin/leads': {
       id: '/_authenticated/admin/leads'
       path: '/admin/leads'
@@ -335,6 +388,13 @@ declare module '@tanstack/react-router' {
       path: '/admin/crm'
       fullPath: '/admin/crm'
       preLoaderRoute: typeof AuthenticatedAdminCrmRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/portal/projects/$projectId': {
+      id: '/_authenticated/portal/projects/$projectId'
+      path: '/portal/projects/$projectId'
+      fullPath: '/portal/projects/$projectId'
+      preLoaderRoute: typeof AuthenticatedPortalProjectsProjectIdRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/admin/lead/$leadId': {
@@ -350,13 +410,18 @@ declare module '@tanstack/react-router' {
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedAdminCrmRoute: typeof AuthenticatedAdminCrmRoute
   AuthenticatedAdminLeadsRoute: typeof AuthenticatedAdminLeadsRoute
+  AuthenticatedPortalIndexRoute: typeof AuthenticatedPortalIndexRoute
   AuthenticatedAdminLeadLeadIdRoute: typeof AuthenticatedAdminLeadLeadIdRoute
+  AuthenticatedPortalProjectsProjectIdRoute: typeof AuthenticatedPortalProjectsProjectIdRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAdminCrmRoute: AuthenticatedAdminCrmRoute,
   AuthenticatedAdminLeadsRoute: AuthenticatedAdminLeadsRoute,
+  AuthenticatedPortalIndexRoute: AuthenticatedPortalIndexRoute,
   AuthenticatedAdminLeadLeadIdRoute: AuthenticatedAdminLeadLeadIdRoute,
+  AuthenticatedPortalProjectsProjectIdRoute:
+    AuthenticatedPortalProjectsProjectIdRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
@@ -385,19 +450,10 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   IndustriesRoute: IndustriesRoute,
   PricingRoute: PricingRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
   ServicesRoute: ServicesRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
