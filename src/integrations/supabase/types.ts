@@ -216,6 +216,133 @@ export type Database = {
           },
         ]
       }
+      profiles: {
+        Row: {
+          company_name: string | null
+          country: string | null
+          created_at: string
+          full_name: string | null
+          id: string
+          phone: string | null
+          updated_at: string
+        }
+        Insert: {
+          company_name?: string | null
+          country?: string | null
+          created_at?: string
+          full_name?: string | null
+          id: string
+          phone?: string | null
+          updated_at?: string
+        }
+        Update: {
+          company_name?: string | null
+          country?: string | null
+          created_at?: string
+          full_name?: string | null
+          id?: string
+          phone?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      project_timeline: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          description: string | null
+          event_date: string
+          id: string
+          project_id: string
+          title: string
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          event_date?: string
+          id?: string
+          project_id: string
+          title: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          event_date?: string
+          id?: string
+          project_id?: string
+          title?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_timeline_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      projects: {
+        Row: {
+          assigned_team: string[]
+          created_at: string
+          created_by: string | null
+          description: string | null
+          expected_completion: string | null
+          id: string
+          lead_id: string | null
+          name: string
+          owner_id: string
+          progress: number
+          service_type: string
+          start_date: string | null
+          status: Database["public"]["Enums"]["project_status"]
+          updated_at: string
+        }
+        Insert: {
+          assigned_team?: string[]
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          expected_completion?: string | null
+          id?: string
+          lead_id?: string | null
+          name: string
+          owner_id: string
+          progress?: number
+          service_type: string
+          start_date?: string | null
+          status?: Database["public"]["Enums"]["project_status"]
+          updated_at?: string
+        }
+        Update: {
+          assigned_team?: string[]
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          expected_completion?: string | null
+          id?: string
+          lead_id?: string | null
+          name?: string
+          owner_id?: string
+          progress?: number
+          service_type?: string
+          start_date?: string | null
+          status?: Database["public"]["Enums"]["project_status"]
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "projects_lead_id_fkey"
+            columns: ["lead_id"]
+            isOneToOne: false
+            referencedRelation: "leads"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       tasks: {
         Row: {
           assigned_to: string | null
@@ -290,6 +417,7 @@ export type Database = {
     }
     Functions: {
       can_access_lead: { Args: { _lead_id: string }; Returns: boolean }
+      can_access_project: { Args: { _project_id: string }; Returns: boolean }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
@@ -310,6 +438,13 @@ export type Database = {
         | "Negotiation"
         | "Won"
         | "Lost"
+      project_status:
+        | "Pending"
+        | "Planning"
+        | "Development"
+        | "Testing"
+        | "Deployment"
+        | "Completed"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -448,6 +583,14 @@ export const Constants = {
         "Negotiation",
         "Won",
         "Lost",
+      ],
+      project_status: [
+        "Pending",
+        "Planning",
+        "Development",
+        "Testing",
+        "Deployment",
+        "Completed",
       ],
     },
   },
