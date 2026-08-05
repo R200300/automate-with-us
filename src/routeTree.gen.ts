@@ -24,6 +24,7 @@ import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CaseStudiesSlugRouteImport } from './routes/case-studies.$slug'
 import { Route as AuthenticatedPortalIndexRouteImport } from './routes/_authenticated/portal.index'
+import { Route as AuthenticatedPortalDocumentsRouteImport } from './routes/_authenticated/portal.documents'
 import { Route as AuthenticatedAdminLeadsRouteImport } from './routes/_authenticated/admin.leads'
 import { Route as AuthenticatedAdminCrmRouteImport } from './routes/_authenticated/admin.crm'
 import { Route as AuthenticatedPortalProjectsProjectIdRouteImport } from './routes/_authenticated/portal.projects.$projectId'
@@ -104,6 +105,12 @@ const AuthenticatedPortalIndexRoute =
     path: '/portal/',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedPortalDocumentsRoute =
+  AuthenticatedPortalDocumentsRouteImport.update({
+    id: '/portal/documents',
+    path: '/portal/documents',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedAdminLeadsRoute = AuthenticatedAdminLeadsRouteImport.update({
   id: '/admin/leads',
   path: '/admin/leads',
@@ -143,6 +150,7 @@ export interface FileRoutesByFullPath {
   '/case-studies/$slug': typeof CaseStudiesSlugRoute
   '/admin/crm': typeof AuthenticatedAdminCrmRoute
   '/admin/leads': typeof AuthenticatedAdminLeadsRoute
+  '/portal/documents': typeof AuthenticatedPortalDocumentsRoute
   '/portal/': typeof AuthenticatedPortalIndexRoute
   '/admin/lead/$leadId': typeof AuthenticatedAdminLeadLeadIdRoute
   '/portal/projects/$projectId': typeof AuthenticatedPortalProjectsProjectIdRoute
@@ -163,6 +171,7 @@ export interface FileRoutesByTo {
   '/case-studies/$slug': typeof CaseStudiesSlugRoute
   '/admin/crm': typeof AuthenticatedAdminCrmRoute
   '/admin/leads': typeof AuthenticatedAdminLeadsRoute
+  '/portal/documents': typeof AuthenticatedPortalDocumentsRoute
   '/portal': typeof AuthenticatedPortalIndexRoute
   '/admin/lead/$leadId': typeof AuthenticatedAdminLeadLeadIdRoute
   '/portal/projects/$projectId': typeof AuthenticatedPortalProjectsProjectIdRoute
@@ -185,6 +194,7 @@ export interface FileRoutesById {
   '/case-studies/$slug': typeof CaseStudiesSlugRoute
   '/_authenticated/admin/crm': typeof AuthenticatedAdminCrmRoute
   '/_authenticated/admin/leads': typeof AuthenticatedAdminLeadsRoute
+  '/_authenticated/portal/documents': typeof AuthenticatedPortalDocumentsRoute
   '/_authenticated/portal/': typeof AuthenticatedPortalIndexRoute
   '/_authenticated/admin/lead/$leadId': typeof AuthenticatedAdminLeadLeadIdRoute
   '/_authenticated/portal/projects/$projectId': typeof AuthenticatedPortalProjectsProjectIdRoute
@@ -207,6 +217,7 @@ export interface FileRouteTypes {
     | '/case-studies/$slug'
     | '/admin/crm'
     | '/admin/leads'
+    | '/portal/documents'
     | '/portal/'
     | '/admin/lead/$leadId'
     | '/portal/projects/$projectId'
@@ -227,6 +238,7 @@ export interface FileRouteTypes {
     | '/case-studies/$slug'
     | '/admin/crm'
     | '/admin/leads'
+    | '/portal/documents'
     | '/portal'
     | '/admin/lead/$leadId'
     | '/portal/projects/$projectId'
@@ -248,6 +260,7 @@ export interface FileRouteTypes {
     | '/case-studies/$slug'
     | '/_authenticated/admin/crm'
     | '/_authenticated/admin/leads'
+    | '/_authenticated/portal/documents'
     | '/_authenticated/portal/'
     | '/_authenticated/admin/lead/$leadId'
     | '/_authenticated/portal/projects/$projectId'
@@ -376,6 +389,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedPortalIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/portal/documents': {
+      id: '/_authenticated/portal/documents'
+      path: '/portal/documents'
+      fullPath: '/portal/documents'
+      preLoaderRoute: typeof AuthenticatedPortalDocumentsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/admin/leads': {
       id: '/_authenticated/admin/leads'
       path: '/admin/leads'
@@ -410,6 +430,7 @@ declare module '@tanstack/react-router' {
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedAdminCrmRoute: typeof AuthenticatedAdminCrmRoute
   AuthenticatedAdminLeadsRoute: typeof AuthenticatedAdminLeadsRoute
+  AuthenticatedPortalDocumentsRoute: typeof AuthenticatedPortalDocumentsRoute
   AuthenticatedPortalIndexRoute: typeof AuthenticatedPortalIndexRoute
   AuthenticatedAdminLeadLeadIdRoute: typeof AuthenticatedAdminLeadLeadIdRoute
   AuthenticatedPortalProjectsProjectIdRoute: typeof AuthenticatedPortalProjectsProjectIdRoute
@@ -418,6 +439,7 @@ interface AuthenticatedRouteRouteChildren {
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAdminCrmRoute: AuthenticatedAdminCrmRoute,
   AuthenticatedAdminLeadsRoute: AuthenticatedAdminLeadsRoute,
+  AuthenticatedPortalDocumentsRoute: AuthenticatedPortalDocumentsRoute,
   AuthenticatedPortalIndexRoute: AuthenticatedPortalIndexRoute,
   AuthenticatedAdminLeadLeadIdRoute: AuthenticatedAdminLeadLeadIdRoute,
   AuthenticatedPortalProjectsProjectIdRoute:
