@@ -14,6 +14,133 @@ export type Database = {
   }
   public: {
     Tables: {
+      documents: {
+        Row: {
+          category: string
+          created_at: string
+          id: string
+          mime_type: string | null
+          name: string
+          owner_id: string
+          project_id: string | null
+          size_bytes: number
+          storage_path: string
+          updated_at: string
+          uploaded_by: string | null
+        }
+        Insert: {
+          category?: string
+          created_at?: string
+          id?: string
+          mime_type?: string | null
+          name: string
+          owner_id: string
+          project_id?: string | null
+          size_bytes?: number
+          storage_path: string
+          updated_at?: string
+          uploaded_by?: string | null
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          id?: string
+          mime_type?: string | null
+          name?: string
+          owner_id?: string
+          project_id?: string | null
+          size_bytes?: number
+          storage_path?: string
+          updated_at?: string
+          uploaded_by?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "documents_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      invoices: {
+        Row: {
+          amount: number
+          created_at: string
+          created_by: string | null
+          currency: string
+          description: string | null
+          due_date: string | null
+          id: string
+          invoice_number: string
+          is_subscription: boolean
+          issue_date: string
+          line_items: Json
+          owner_id: string
+          paid_at: string | null
+          payment_link: string | null
+          payment_reference: string | null
+          project_id: string | null
+          status: Database["public"]["Enums"]["invoice_status"]
+          subscription_interval: string | null
+          tax_amount: number
+          updated_at: string
+        }
+        Insert: {
+          amount?: number
+          created_at?: string
+          created_by?: string | null
+          currency?: string
+          description?: string | null
+          due_date?: string | null
+          id?: string
+          invoice_number: string
+          is_subscription?: boolean
+          issue_date?: string
+          line_items?: Json
+          owner_id: string
+          paid_at?: string | null
+          payment_link?: string | null
+          payment_reference?: string | null
+          project_id?: string | null
+          status?: Database["public"]["Enums"]["invoice_status"]
+          subscription_interval?: string | null
+          tax_amount?: number
+          updated_at?: string
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          created_by?: string | null
+          currency?: string
+          description?: string | null
+          due_date?: string | null
+          id?: string
+          invoice_number?: string
+          is_subscription?: boolean
+          issue_date?: string
+          line_items?: Json
+          owner_id?: string
+          paid_at?: string | null
+          payment_link?: string | null
+          payment_reference?: string | null
+          project_id?: string | null
+          status?: Database["public"]["Enums"]["invoice_status"]
+          subscription_interval?: string | null
+          tax_amount?: number
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "invoices_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       lead_activity: {
         Row: {
           actor: string | null
@@ -184,6 +311,77 @@ export type Database = {
         }
         Relationships: []
       }
+      meetings: {
+        Row: {
+          agenda: string | null
+          calendar_error: string | null
+          calendar_event_id: string | null
+          calendar_status: string
+          cancelled_reason: string | null
+          created_at: string
+          created_by: string | null
+          duration_minutes: number
+          id: string
+          meet_link: string | null
+          owner_id: string
+          project_id: string | null
+          reminder_sent_at: string | null
+          scheduled_at: string
+          status: Database["public"]["Enums"]["meeting_status"]
+          timezone: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          agenda?: string | null
+          calendar_error?: string | null
+          calendar_event_id?: string | null
+          calendar_status?: string
+          cancelled_reason?: string | null
+          created_at?: string
+          created_by?: string | null
+          duration_minutes?: number
+          id?: string
+          meet_link?: string | null
+          owner_id: string
+          project_id?: string | null
+          reminder_sent_at?: string | null
+          scheduled_at: string
+          status?: Database["public"]["Enums"]["meeting_status"]
+          timezone?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          agenda?: string | null
+          calendar_error?: string | null
+          calendar_event_id?: string | null
+          calendar_status?: string
+          cancelled_reason?: string | null
+          created_at?: string
+          created_by?: string | null
+          duration_minutes?: number
+          id?: string
+          meet_link?: string | null
+          owner_id?: string
+          project_id?: string | null
+          reminder_sent_at?: string | null
+          scheduled_at?: string
+          status?: Database["public"]["Enums"]["meeting_status"]
+          timezone?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "meetings_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       notes: {
         Row: {
           created_at: string
@@ -215,6 +413,39 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      notifications: {
+        Row: {
+          created_at: string
+          id: string
+          link: string | null
+          message: string
+          read_at: string | null
+          title: string
+          type: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          link?: string | null
+          message: string
+          read_at?: string | null
+          title: string
+          type?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          link?: string | null
+          message?: string
+          read_at?: string | null
+          title?: string
+          type?: string
+          user_id?: string
+        }
+        Relationships: []
       }
       profiles: {
         Row: {
@@ -390,6 +621,97 @@ export type Database = {
           },
         ]
       }
+      ticket_messages: {
+        Row: {
+          attachments: Json
+          author_id: string | null
+          author_role: string
+          body: string
+          created_at: string
+          id: string
+          is_internal: boolean
+          ticket_id: string
+        }
+        Insert: {
+          attachments?: Json
+          author_id?: string | null
+          author_role?: string
+          body: string
+          created_at?: string
+          id?: string
+          is_internal?: boolean
+          ticket_id: string
+        }
+        Update: {
+          attachments?: Json
+          author_id?: string | null
+          author_role?: string
+          body?: string
+          created_at?: string
+          id?: string
+          is_internal?: boolean
+          ticket_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ticket_messages_ticket_id_fkey"
+            columns: ["ticket_id"]
+            isOneToOne: false
+            referencedRelation: "tickets"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      tickets: {
+        Row: {
+          category: string
+          created_at: string
+          description: string
+          id: string
+          last_reply_at: string
+          owner_id: string
+          priority: Database["public"]["Enums"]["lead_priority"]
+          project_id: string | null
+          status: Database["public"]["Enums"]["ticket_status"]
+          subject: string
+          updated_at: string
+        }
+        Insert: {
+          category?: string
+          created_at?: string
+          description: string
+          id?: string
+          last_reply_at?: string
+          owner_id: string
+          priority?: Database["public"]["Enums"]["lead_priority"]
+          project_id?: string | null
+          status?: Database["public"]["Enums"]["ticket_status"]
+          subject: string
+          updated_at?: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          description?: string
+          id?: string
+          last_reply_at?: string
+          owner_id?: string
+          priority?: Database["public"]["Enums"]["lead_priority"]
+          project_id?: string | null
+          status?: Database["public"]["Enums"]["ticket_status"]
+          subject?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tickets_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       user_roles: {
         Row: {
           created_at: string
@@ -418,6 +740,7 @@ export type Database = {
     Functions: {
       can_access_lead: { Args: { _lead_id: string }; Returns: boolean }
       can_access_project: { Args: { _project_id: string }; Returns: boolean }
+      can_access_ticket: { Args: { _ticket_id: string }; Returns: boolean }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
@@ -428,7 +751,14 @@ export type Database = {
     }
     Enums: {
       app_role: "admin" | "moderator" | "user"
+      invoice_status: "Draft" | "Sent" | "Paid" | "Overdue" | "Void"
       lead_priority: "Low" | "Medium" | "High" | "Urgent"
+      meeting_status:
+        | "Requested"
+        | "Scheduled"
+        | "Rescheduled"
+        | "Cancelled"
+        | "Completed"
       pipeline_stage:
         | "New"
         | "Contacted"
@@ -445,6 +775,12 @@ export type Database = {
         | "Testing"
         | "Deployment"
         | "Completed"
+      ticket_status:
+        | "Open"
+        | "In Progress"
+        | "Waiting on Customer"
+        | "Resolved"
+        | "Closed"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -573,7 +909,15 @@ export const Constants = {
   public: {
     Enums: {
       app_role: ["admin", "moderator", "user"],
+      invoice_status: ["Draft", "Sent", "Paid", "Overdue", "Void"],
       lead_priority: ["Low", "Medium", "High", "Urgent"],
+      meeting_status: [
+        "Requested",
+        "Scheduled",
+        "Rescheduled",
+        "Cancelled",
+        "Completed",
+      ],
       pipeline_stage: [
         "New",
         "Contacted",
@@ -591,6 +935,13 @@ export const Constants = {
         "Testing",
         "Deployment",
         "Completed",
+      ],
+      ticket_status: [
+        "Open",
+        "In Progress",
+        "Waiting on Customer",
+        "Resolved",
+        "Closed",
       ],
     },
   },
