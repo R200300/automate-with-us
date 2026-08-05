@@ -13,9 +13,6 @@ import {
 const links = [
   { to: "/portal", label: "Overview", exact: true },
   { to: "/portal/documents", label: "Documents" },
-  { to: "/portal/meetings", label: "Meetings" },
-  { to: "/portal/tickets", label: "Support" },
-  { to: "/portal/invoices", label: "Invoices" },
 ] as const;
 
 export function PortalNav() {
@@ -97,9 +94,9 @@ export function NotificationBell() {
                     {new Date(n.created_at).toLocaleString()}
                   </span>
                   {n.link && (
-                    <Link to={n.link} className="text-xs font-medium text-primary">
+                    <a href={n.link} className="text-xs font-medium text-primary">
                       Open
-                    </Link>
+                    </a>
                   )}
                 </div>
               </div>
