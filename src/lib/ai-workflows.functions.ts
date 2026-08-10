@@ -30,7 +30,7 @@ export type WorkflowNode = {
   kind: NodeKind;
   label: string;
   action_type: WorkflowAction | null;
-  config: Record<string, unknown>;
+  config: Record<string, string>;
   position: number;
 };
 
@@ -39,7 +39,7 @@ export type Workflow = {
   name: string;
   description: string | null;
   trigger_type: WorkflowTrigger;
-  trigger_config: Record<string, unknown>;
+  trigger_config: Record<string, string>;
   is_active: boolean;
   run_count: number;
   last_run_at: string | null;
@@ -52,7 +52,7 @@ export type WorkflowExecution = {
   workflow_id: string;
   status: "Running" | "Success" | "Failed" | "Skipped";
   steps: Array<{ label: string; status: string; detail?: string }>;
-  trigger_payload: Record<string, unknown>;
+  trigger_payload: Record<string, string>;
   error: string | null;
   started_at: string;
   finished_at: string | null;

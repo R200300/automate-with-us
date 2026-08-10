@@ -9,7 +9,7 @@ export type ActivityLog = {
   entity_id: string | null;
   message: string;
   level: string;
-  metadata: Record<string, unknown>;
+  metadata: Record<string, string | number | boolean | null>;
   created_at: string;
 };
 
