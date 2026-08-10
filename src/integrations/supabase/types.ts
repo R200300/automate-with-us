@@ -14,6 +14,243 @@ export type Database = {
   }
   public: {
     Tables: {
+      ai_assistants: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          description: string | null
+          fallback_behavior: string | null
+          id: string
+          knowledge_base_id: string | null
+          language: string
+          model: string
+          name: string
+          objective: string | null
+          project_id: string | null
+          status: Database["public"]["Enums"]["ai_entity_status"]
+          system_instructions: string
+          tone: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          fallback_behavior?: string | null
+          id?: string
+          knowledge_base_id?: string | null
+          language?: string
+          model?: string
+          name: string
+          objective?: string | null
+          project_id?: string | null
+          status?: Database["public"]["Enums"]["ai_entity_status"]
+          system_instructions?: string
+          tone?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          fallback_behavior?: string | null
+          id?: string
+          knowledge_base_id?: string | null
+          language?: string
+          model?: string
+          name?: string
+          objective?: string | null
+          project_id?: string | null
+          status?: Database["public"]["Enums"]["ai_entity_status"]
+          system_instructions?: string
+          tone?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ai_assistants_knowledge_base_id_fkey"
+            columns: ["knowledge_base_id"]
+            isOneToOne: false
+            referencedRelation: "knowledge_bases"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "ai_assistants_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      ai_usage: {
+        Row: {
+          ai_requests: number
+          chat_messages: number
+          created_at: string
+          documents_processed: number
+          id: string
+          input_tokens: number
+          output_tokens: number
+          period_month: string
+          request_limit: number
+          updated_at: string
+          user_id: string
+          voice_calls: number
+          workflow_executions: number
+        }
+        Insert: {
+          ai_requests?: number
+          chat_messages?: number
+          created_at?: string
+          documents_processed?: number
+          id?: string
+          input_tokens?: number
+          output_tokens?: number
+          period_month: string
+          request_limit?: number
+          updated_at?: string
+          user_id: string
+          voice_calls?: number
+          workflow_executions?: number
+        }
+        Update: {
+          ai_requests?: number
+          chat_messages?: number
+          created_at?: string
+          documents_processed?: number
+          id?: string
+          input_tokens?: number
+          output_tokens?: number
+          period_month?: string
+          request_limit?: number
+          updated_at?: string
+          user_id?: string
+          voice_calls?: number
+          workflow_executions?: number
+        }
+        Relationships: []
+      }
+      automation_activity_logs: {
+        Row: {
+          actor: string | null
+          created_at: string
+          entity_id: string | null
+          entity_type: string
+          event_type: string
+          id: string
+          level: string
+          message: string
+          metadata: Json
+          user_id: string
+        }
+        Insert: {
+          actor?: string | null
+          created_at?: string
+          entity_id?: string | null
+          entity_type: string
+          event_type: string
+          id?: string
+          level?: string
+          message: string
+          metadata?: Json
+          user_id: string
+        }
+        Update: {
+          actor?: string | null
+          created_at?: string
+          entity_id?: string | null
+          entity_type?: string
+          event_type?: string
+          id?: string
+          level?: string
+          message?: string
+          metadata?: Json
+          user_id?: string
+        }
+        Relationships: []
+      }
+      chatbots: {
+        Row: {
+          assistant_id: string | null
+          business_info: string | null
+          contact_info: string | null
+          created_at: string
+          created_by: string | null
+          fallback_message: string
+          id: string
+          knowledge_base_id: string | null
+          language: string
+          model: string
+          name: string
+          status: Database["public"]["Enums"]["ai_entity_status"]
+          system_prompt: string
+          tone: string
+          updated_at: string
+          user_id: string
+          welcome_message: string
+          working_hours: string | null
+        }
+        Insert: {
+          assistant_id?: string | null
+          business_info?: string | null
+          contact_info?: string | null
+          created_at?: string
+          created_by?: string | null
+          fallback_message?: string
+          id?: string
+          knowledge_base_id?: string | null
+          language?: string
+          model?: string
+          name: string
+          status?: Database["public"]["Enums"]["ai_entity_status"]
+          system_prompt?: string
+          tone?: string
+          updated_at?: string
+          user_id: string
+          welcome_message?: string
+          working_hours?: string | null
+        }
+        Update: {
+          assistant_id?: string | null
+          business_info?: string | null
+          contact_info?: string | null
+          created_at?: string
+          created_by?: string | null
+          fallback_message?: string
+          id?: string
+          knowledge_base_id?: string | null
+          language?: string
+          model?: string
+          name?: string
+          status?: Database["public"]["Enums"]["ai_entity_status"]
+          system_prompt?: string
+          tone?: string
+          updated_at?: string
+          user_id?: string
+          welcome_message?: string
+          working_hours?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "chatbots_assistant_id_fkey"
+            columns: ["assistant_id"]
+            isOneToOne: false
+            referencedRelation: "ai_assistants"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "chatbots_knowledge_base_id_fkey"
+            columns: ["knowledge_base_id"]
+            isOneToOne: false
+            referencedRelation: "knowledge_bases"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       documents: {
         Row: {
           category: string
@@ -137,6 +374,95 @@ export type Database = {
             columns: ["project_id"]
             isOneToOne: false
             referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      knowledge_bases: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          description: string | null
+          id: string
+          name: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          id?: string
+          name: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          id?: string
+          name?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      knowledge_documents: {
+        Row: {
+          content: string | null
+          created_at: string
+          created_by: string | null
+          extracted_chars: number
+          id: string
+          knowledge_base_id: string
+          mime_type: string | null
+          name: string
+          processing_error: string | null
+          processing_status: Database["public"]["Enums"]["doc_processing_status"]
+          size_bytes: number
+          storage_path: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          content?: string | null
+          created_at?: string
+          created_by?: string | null
+          extracted_chars?: number
+          id?: string
+          knowledge_base_id: string
+          mime_type?: string | null
+          name: string
+          processing_error?: string | null
+          processing_status?: Database["public"]["Enums"]["doc_processing_status"]
+          size_bytes?: number
+          storage_path: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          content?: string | null
+          created_at?: string
+          created_by?: string | null
+          extracted_chars?: number
+          id?: string
+          knowledge_base_id?: string
+          mime_type?: string | null
+          name?: string
+          processing_error?: string | null
+          processing_status?: Database["public"]["Enums"]["doc_processing_status"]
+          size_bytes?: number
+          storage_path?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "knowledge_documents_knowledge_base_id_fkey"
+            columns: ["knowledge_base_id"]
+            isOneToOne: false
+            referencedRelation: "knowledge_bases"
             referencedColumns: ["id"]
           },
         ]
@@ -574,6 +900,48 @@ export type Database = {
           },
         ]
       }
+      prompts: {
+        Row: {
+          body: string
+          category: Database["public"]["Enums"]["prompt_category"]
+          created_at: string
+          created_by: string | null
+          description: string | null
+          id: string
+          is_favorite: boolean
+          title: string
+          updated_at: string
+          user_id: string
+          variables: Json
+        }
+        Insert: {
+          body: string
+          category?: Database["public"]["Enums"]["prompt_category"]
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          id?: string
+          is_favorite?: boolean
+          title: string
+          updated_at?: string
+          user_id: string
+          variables?: Json
+        }
+        Update: {
+          body?: string
+          category?: Database["public"]["Enums"]["prompt_category"]
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          id?: string
+          is_favorite?: boolean
+          title?: string
+          updated_at?: string
+          user_id?: string
+          variables?: Json
+        }
+        Relationships: []
+      }
       tasks: {
         Row: {
           assigned_to: string | null
@@ -733,6 +1101,231 @@ export type Database = {
         }
         Relationships: []
       }
+      voice_agents: {
+        Row: {
+          assistant_id: string | null
+          business_hours: string | null
+          business_name: string | null
+          call_objective: string | null
+          created_at: string
+          created_by: string | null
+          fallback_message: string | null
+          greeting: string | null
+          id: string
+          language: string
+          missed_calls: number
+          name: string
+          provider: string | null
+          status: Database["public"]["Enums"]["ai_entity_status"]
+          successful_calls: number
+          system_instructions: string
+          total_call_seconds: number
+          total_calls: number
+          updated_at: string
+          user_id: string
+          voice: string
+        }
+        Insert: {
+          assistant_id?: string | null
+          business_hours?: string | null
+          business_name?: string | null
+          call_objective?: string | null
+          created_at?: string
+          created_by?: string | null
+          fallback_message?: string | null
+          greeting?: string | null
+          id?: string
+          language?: string
+          missed_calls?: number
+          name: string
+          provider?: string | null
+          status?: Database["public"]["Enums"]["ai_entity_status"]
+          successful_calls?: number
+          system_instructions?: string
+          total_call_seconds?: number
+          total_calls?: number
+          updated_at?: string
+          user_id: string
+          voice?: string
+        }
+        Update: {
+          assistant_id?: string | null
+          business_hours?: string | null
+          business_name?: string | null
+          call_objective?: string | null
+          created_at?: string
+          created_by?: string | null
+          fallback_message?: string | null
+          greeting?: string | null
+          id?: string
+          language?: string
+          missed_calls?: number
+          name?: string
+          provider?: string | null
+          status?: Database["public"]["Enums"]["ai_entity_status"]
+          successful_calls?: number
+          system_instructions?: string
+          total_call_seconds?: number
+          total_calls?: number
+          updated_at?: string
+          user_id?: string
+          voice?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "voice_agents_assistant_id_fkey"
+            columns: ["assistant_id"]
+            isOneToOne: false
+            referencedRelation: "ai_assistants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      workflow_executions: {
+        Row: {
+          created_at: string
+          duration_ms: number | null
+          error: string | null
+          finished_at: string | null
+          id: string
+          started_at: string
+          status: Database["public"]["Enums"]["execution_status"]
+          steps: Json
+          trigger_payload: Json
+          user_id: string
+          workflow_id: string
+        }
+        Insert: {
+          created_at?: string
+          duration_ms?: number | null
+          error?: string | null
+          finished_at?: string | null
+          id?: string
+          started_at?: string
+          status?: Database["public"]["Enums"]["execution_status"]
+          steps?: Json
+          trigger_payload?: Json
+          user_id: string
+          workflow_id: string
+        }
+        Update: {
+          created_at?: string
+          duration_ms?: number | null
+          error?: string | null
+          finished_at?: string | null
+          id?: string
+          started_at?: string
+          status?: Database["public"]["Enums"]["execution_status"]
+          steps?: Json
+          trigger_payload?: Json
+          user_id?: string
+          workflow_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "workflow_executions_workflow_id_fkey"
+            columns: ["workflow_id"]
+            isOneToOne: false
+            referencedRelation: "workflows"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      workflow_nodes: {
+        Row: {
+          action_type:
+            | Database["public"]["Enums"]["workflow_action_type"]
+            | null
+          config: Json
+          created_at: string
+          id: string
+          kind: Database["public"]["Enums"]["workflow_node_kind"]
+          label: string
+          position: number
+          updated_at: string
+          workflow_id: string
+        }
+        Insert: {
+          action_type?:
+            | Database["public"]["Enums"]["workflow_action_type"]
+            | null
+          config?: Json
+          created_at?: string
+          id?: string
+          kind: Database["public"]["Enums"]["workflow_node_kind"]
+          label: string
+          position?: number
+          updated_at?: string
+          workflow_id: string
+        }
+        Update: {
+          action_type?:
+            | Database["public"]["Enums"]["workflow_action_type"]
+            | null
+          config?: Json
+          created_at?: string
+          id?: string
+          kind?: Database["public"]["Enums"]["workflow_node_kind"]
+          label?: string
+          position?: number
+          updated_at?: string
+          workflow_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "workflow_nodes_workflow_id_fkey"
+            columns: ["workflow_id"]
+            isOneToOne: false
+            referencedRelation: "workflows"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      workflows: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          description: string | null
+          id: string
+          is_active: boolean
+          last_run_at: string | null
+          name: string
+          run_count: number
+          trigger_config: Json
+          trigger_type: Database["public"]["Enums"]["workflow_trigger_type"]
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          id?: string
+          is_active?: boolean
+          last_run_at?: string | null
+          name: string
+          run_count?: number
+          trigger_config?: Json
+          trigger_type?: Database["public"]["Enums"]["workflow_trigger_type"]
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          id?: string
+          is_active?: boolean
+          last_run_at?: string | null
+          name?: string
+          run_count?: number
+          trigger_config?: Json
+          trigger_type?: Database["public"]["Enums"]["workflow_trigger_type"]
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -741,6 +1334,7 @@ export type Database = {
       can_access_lead: { Args: { _lead_id: string }; Returns: boolean }
       can_access_project: { Args: { _project_id: string }; Returns: boolean }
       can_access_ticket: { Args: { _ticket_id: string }; Returns: boolean }
+      can_access_workflow: { Args: { _workflow_id: string }; Returns: boolean }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
@@ -750,7 +1344,10 @@ export type Database = {
       }
     }
     Enums: {
+      ai_entity_status: "Draft" | "Active" | "Inactive" | "Archived"
       app_role: "admin" | "moderator" | "user"
+      doc_processing_status: "Pending" | "Processing" | "Ready" | "Failed"
+      execution_status: "Running" | "Success" | "Failed" | "Skipped"
       invoice_status: "Draft" | "Sent" | "Paid" | "Overdue" | "Void"
       lead_priority: "Low" | "Medium" | "High" | "Urgent"
       meeting_status:
@@ -775,12 +1372,32 @@ export type Database = {
         | "Testing"
         | "Deployment"
         | "Completed"
+      prompt_category:
+        | "Sales"
+        | "Customer Support"
+        | "Marketing"
+        | "Lead Generation"
+        | "Operations"
+        | "General"
       ticket_status:
         | "Open"
         | "In Progress"
         | "Waiting on Customer"
         | "Resolved"
         | "Closed"
+      workflow_action_type:
+        | "Send Email"
+        | "Create Task"
+        | "Update Lead"
+        | "Send Notification"
+        | "AI Generate Response"
+      workflow_node_kind: "trigger" | "action" | "condition" | "end"
+      workflow_trigger_type:
+        | "New Lead"
+        | "Form Submitted"
+        | "New Customer"
+        | "Scheduled Time"
+        | "Webhook"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -908,7 +1525,10 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
+      ai_entity_status: ["Draft", "Active", "Inactive", "Archived"],
       app_role: ["admin", "moderator", "user"],
+      doc_processing_status: ["Pending", "Processing", "Ready", "Failed"],
+      execution_status: ["Running", "Success", "Failed", "Skipped"],
       invoice_status: ["Draft", "Sent", "Paid", "Overdue", "Void"],
       lead_priority: ["Low", "Medium", "High", "Urgent"],
       meeting_status: [
@@ -936,12 +1556,35 @@ export const Constants = {
         "Deployment",
         "Completed",
       ],
+      prompt_category: [
+        "Sales",
+        "Customer Support",
+        "Marketing",
+        "Lead Generation",
+        "Operations",
+        "General",
+      ],
       ticket_status: [
         "Open",
         "In Progress",
         "Waiting on Customer",
         "Resolved",
         "Closed",
+      ],
+      workflow_action_type: [
+        "Send Email",
+        "Create Task",
+        "Update Lead",
+        "Send Notification",
+        "AI Generate Response",
+      ],
+      workflow_node_kind: ["trigger", "action", "condition", "end"],
+      workflow_trigger_type: [
+        "New Lead",
+        "Form Submitted",
+        "New Customer",
+        "Scheduled Time",
+        "Webhook",
       ],
     },
   },
