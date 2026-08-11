@@ -29,6 +29,7 @@ import { Route as AuthenticatedAdminLeadsRouteImport } from './routes/_authentic
 import { Route as AuthenticatedAdminCrmRouteImport } from './routes/_authenticated/admin.crm'
 import { Route as AuthenticatedDashboardAiIndexRouteImport } from './routes/_authenticated/dashboard.ai.index'
 import { Route as AuthenticatedPortalProjectsProjectIdRouteImport } from './routes/_authenticated/portal.projects.$projectId'
+import { Route as AuthenticatedDashboardAiAssistantsRouteImport } from './routes/_authenticated/dashboard.ai.assistants'
 import { Route as AuthenticatedAdminLeadLeadIdRouteImport } from './routes/_authenticated/admin.lead.$leadId'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -134,6 +135,12 @@ const AuthenticatedPortalProjectsProjectIdRoute =
     path: '/portal/projects/$projectId',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedDashboardAiAssistantsRoute =
+  AuthenticatedDashboardAiAssistantsRouteImport.update({
+    id: '/dashboard/ai/assistants',
+    path: '/dashboard/ai/assistants',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedAdminLeadLeadIdRoute =
   AuthenticatedAdminLeadLeadIdRouteImport.update({
     id: '/admin/lead/$leadId',
@@ -160,6 +167,7 @@ export interface FileRoutesByFullPath {
   '/portal/documents': typeof AuthenticatedPortalDocumentsRoute
   '/portal/': typeof AuthenticatedPortalIndexRoute
   '/admin/lead/$leadId': typeof AuthenticatedAdminLeadLeadIdRoute
+  '/dashboard/ai/assistants': typeof AuthenticatedDashboardAiAssistantsRoute
   '/portal/projects/$projectId': typeof AuthenticatedPortalProjectsProjectIdRoute
   '/dashboard/ai/': typeof AuthenticatedDashboardAiIndexRoute
 }
@@ -182,6 +190,7 @@ export interface FileRoutesByTo {
   '/portal/documents': typeof AuthenticatedPortalDocumentsRoute
   '/portal': typeof AuthenticatedPortalIndexRoute
   '/admin/lead/$leadId': typeof AuthenticatedAdminLeadLeadIdRoute
+  '/dashboard/ai/assistants': typeof AuthenticatedDashboardAiAssistantsRoute
   '/portal/projects/$projectId': typeof AuthenticatedPortalProjectsProjectIdRoute
   '/dashboard/ai': typeof AuthenticatedDashboardAiIndexRoute
 }
@@ -206,6 +215,7 @@ export interface FileRoutesById {
   '/_authenticated/portal/documents': typeof AuthenticatedPortalDocumentsRoute
   '/_authenticated/portal/': typeof AuthenticatedPortalIndexRoute
   '/_authenticated/admin/lead/$leadId': typeof AuthenticatedAdminLeadLeadIdRoute
+  '/_authenticated/dashboard/ai/assistants': typeof AuthenticatedDashboardAiAssistantsRoute
   '/_authenticated/portal/projects/$projectId': typeof AuthenticatedPortalProjectsProjectIdRoute
   '/_authenticated/dashboard/ai/': typeof AuthenticatedDashboardAiIndexRoute
 }
@@ -230,6 +240,7 @@ export interface FileRouteTypes {
     | '/portal/documents'
     | '/portal/'
     | '/admin/lead/$leadId'
+    | '/dashboard/ai/assistants'
     | '/portal/projects/$projectId'
     | '/dashboard/ai/'
   fileRoutesByTo: FileRoutesByTo
@@ -252,6 +263,7 @@ export interface FileRouteTypes {
     | '/portal/documents'
     | '/portal'
     | '/admin/lead/$leadId'
+    | '/dashboard/ai/assistants'
     | '/portal/projects/$projectId'
     | '/dashboard/ai'
   id:
@@ -275,6 +287,7 @@ export interface FileRouteTypes {
     | '/_authenticated/portal/documents'
     | '/_authenticated/portal/'
     | '/_authenticated/admin/lead/$leadId'
+    | '/_authenticated/dashboard/ai/assistants'
     | '/_authenticated/portal/projects/$projectId'
     | '/_authenticated/dashboard/ai/'
   fileRoutesById: FileRoutesById
@@ -437,6 +450,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedPortalProjectsProjectIdRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/dashboard/ai/assistants': {
+      id: '/_authenticated/dashboard/ai/assistants'
+      path: '/dashboard/ai/assistants'
+      fullPath: '/dashboard/ai/assistants'
+      preLoaderRoute: typeof AuthenticatedDashboardAiAssistantsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/admin/lead/$leadId': {
       id: '/_authenticated/admin/lead/$leadId'
       path: '/admin/lead/$leadId'
@@ -453,6 +473,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedPortalDocumentsRoute: typeof AuthenticatedPortalDocumentsRoute
   AuthenticatedPortalIndexRoute: typeof AuthenticatedPortalIndexRoute
   AuthenticatedAdminLeadLeadIdRoute: typeof AuthenticatedAdminLeadLeadIdRoute
+  AuthenticatedDashboardAiAssistantsRoute: typeof AuthenticatedDashboardAiAssistantsRoute
   AuthenticatedPortalProjectsProjectIdRoute: typeof AuthenticatedPortalProjectsProjectIdRoute
   AuthenticatedDashboardAiIndexRoute: typeof AuthenticatedDashboardAiIndexRoute
 }
@@ -463,6 +484,8 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedPortalDocumentsRoute: AuthenticatedPortalDocumentsRoute,
   AuthenticatedPortalIndexRoute: AuthenticatedPortalIndexRoute,
   AuthenticatedAdminLeadLeadIdRoute: AuthenticatedAdminLeadLeadIdRoute,
+  AuthenticatedDashboardAiAssistantsRoute:
+    AuthenticatedDashboardAiAssistantsRoute,
   AuthenticatedPortalProjectsProjectIdRoute:
     AuthenticatedPortalProjectsProjectIdRoute,
   AuthenticatedDashboardAiIndexRoute: AuthenticatedDashboardAiIndexRoute,
