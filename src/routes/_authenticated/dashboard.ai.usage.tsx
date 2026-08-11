@@ -23,8 +23,8 @@ function UsagePage() {
   });
 
   const usage = data?.usage;
-  const limit = usage?.request_limit ?? 0;
-  const used = usage?.ai_requests ?? 0;
+  const limit = usage?.requestLimit ?? 0;
+  const used = usage?.aiRequests ?? 0;
   const pct = limit > 0 ? Math.min(100, Math.round((used / limit) * 100)) : 0;
 
   return (
