@@ -30,6 +30,7 @@ import { Route as AuthenticatedAdminCrmRouteImport } from './routes/_authenticat
 import { Route as AuthenticatedDashboardAiIndexRouteImport } from './routes/_authenticated/dashboard.ai.index'
 import { Route as AuthenticatedPortalProjectsProjectIdRouteImport } from './routes/_authenticated/portal.projects.$projectId'
 import { Route as AuthenticatedDashboardAiWorkflowsRouteImport } from './routes/_authenticated/dashboard.ai.workflows'
+import { Route as AuthenticatedDashboardAiVoiceRouteImport } from './routes/_authenticated/dashboard.ai.voice'
 import { Route as AuthenticatedDashboardAiPromptsRouteImport } from './routes/_authenticated/dashboard.ai.prompts'
 import { Route as AuthenticatedDashboardAiKnowledgeRouteImport } from './routes/_authenticated/dashboard.ai.knowledge'
 import { Route as AuthenticatedDashboardAiChatbotsRouteImport } from './routes/_authenticated/dashboard.ai.chatbots'
@@ -145,6 +146,12 @@ const AuthenticatedDashboardAiWorkflowsRoute =
     path: '/dashboard/ai/workflows',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedDashboardAiVoiceRoute =
+  AuthenticatedDashboardAiVoiceRouteImport.update({
+    id: '/dashboard/ai/voice',
+    path: '/dashboard/ai/voice',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedDashboardAiPromptsRoute =
   AuthenticatedDashboardAiPromptsRouteImport.update({
     id: '/dashboard/ai/prompts',
@@ -199,6 +206,7 @@ export interface FileRoutesByFullPath {
   '/dashboard/ai/chatbots': typeof AuthenticatedDashboardAiChatbotsRoute
   '/dashboard/ai/knowledge': typeof AuthenticatedDashboardAiKnowledgeRoute
   '/dashboard/ai/prompts': typeof AuthenticatedDashboardAiPromptsRoute
+  '/dashboard/ai/voice': typeof AuthenticatedDashboardAiVoiceRoute
   '/dashboard/ai/workflows': typeof AuthenticatedDashboardAiWorkflowsRoute
   '/portal/projects/$projectId': typeof AuthenticatedPortalProjectsProjectIdRoute
   '/dashboard/ai/': typeof AuthenticatedDashboardAiIndexRoute
@@ -226,6 +234,7 @@ export interface FileRoutesByTo {
   '/dashboard/ai/chatbots': typeof AuthenticatedDashboardAiChatbotsRoute
   '/dashboard/ai/knowledge': typeof AuthenticatedDashboardAiKnowledgeRoute
   '/dashboard/ai/prompts': typeof AuthenticatedDashboardAiPromptsRoute
+  '/dashboard/ai/voice': typeof AuthenticatedDashboardAiVoiceRoute
   '/dashboard/ai/workflows': typeof AuthenticatedDashboardAiWorkflowsRoute
   '/portal/projects/$projectId': typeof AuthenticatedPortalProjectsProjectIdRoute
   '/dashboard/ai': typeof AuthenticatedDashboardAiIndexRoute
@@ -255,6 +264,7 @@ export interface FileRoutesById {
   '/_authenticated/dashboard/ai/chatbots': typeof AuthenticatedDashboardAiChatbotsRoute
   '/_authenticated/dashboard/ai/knowledge': typeof AuthenticatedDashboardAiKnowledgeRoute
   '/_authenticated/dashboard/ai/prompts': typeof AuthenticatedDashboardAiPromptsRoute
+  '/_authenticated/dashboard/ai/voice': typeof AuthenticatedDashboardAiVoiceRoute
   '/_authenticated/dashboard/ai/workflows': typeof AuthenticatedDashboardAiWorkflowsRoute
   '/_authenticated/portal/projects/$projectId': typeof AuthenticatedPortalProjectsProjectIdRoute
   '/_authenticated/dashboard/ai/': typeof AuthenticatedDashboardAiIndexRoute
@@ -284,6 +294,7 @@ export interface FileRouteTypes {
     | '/dashboard/ai/chatbots'
     | '/dashboard/ai/knowledge'
     | '/dashboard/ai/prompts'
+    | '/dashboard/ai/voice'
     | '/dashboard/ai/workflows'
     | '/portal/projects/$projectId'
     | '/dashboard/ai/'
@@ -311,6 +322,7 @@ export interface FileRouteTypes {
     | '/dashboard/ai/chatbots'
     | '/dashboard/ai/knowledge'
     | '/dashboard/ai/prompts'
+    | '/dashboard/ai/voice'
     | '/dashboard/ai/workflows'
     | '/portal/projects/$projectId'
     | '/dashboard/ai'
@@ -339,6 +351,7 @@ export interface FileRouteTypes {
     | '/_authenticated/dashboard/ai/chatbots'
     | '/_authenticated/dashboard/ai/knowledge'
     | '/_authenticated/dashboard/ai/prompts'
+    | '/_authenticated/dashboard/ai/voice'
     | '/_authenticated/dashboard/ai/workflows'
     | '/_authenticated/portal/projects/$projectId'
     | '/_authenticated/dashboard/ai/'
@@ -509,6 +522,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardAiWorkflowsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/dashboard/ai/voice': {
+      id: '/_authenticated/dashboard/ai/voice'
+      path: '/dashboard/ai/voice'
+      fullPath: '/dashboard/ai/voice'
+      preLoaderRoute: typeof AuthenticatedDashboardAiVoiceRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/dashboard/ai/prompts': {
       id: '/_authenticated/dashboard/ai/prompts'
       path: '/dashboard/ai/prompts'
@@ -557,6 +577,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedDashboardAiChatbotsRoute: typeof AuthenticatedDashboardAiChatbotsRoute
   AuthenticatedDashboardAiKnowledgeRoute: typeof AuthenticatedDashboardAiKnowledgeRoute
   AuthenticatedDashboardAiPromptsRoute: typeof AuthenticatedDashboardAiPromptsRoute
+  AuthenticatedDashboardAiVoiceRoute: typeof AuthenticatedDashboardAiVoiceRoute
   AuthenticatedDashboardAiWorkflowsRoute: typeof AuthenticatedDashboardAiWorkflowsRoute
   AuthenticatedPortalProjectsProjectIdRoute: typeof AuthenticatedPortalProjectsProjectIdRoute
   AuthenticatedDashboardAiIndexRoute: typeof AuthenticatedDashboardAiIndexRoute
@@ -574,6 +595,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedDashboardAiKnowledgeRoute:
     AuthenticatedDashboardAiKnowledgeRoute,
   AuthenticatedDashboardAiPromptsRoute: AuthenticatedDashboardAiPromptsRoute,
+  AuthenticatedDashboardAiVoiceRoute: AuthenticatedDashboardAiVoiceRoute,
   AuthenticatedDashboardAiWorkflowsRoute:
     AuthenticatedDashboardAiWorkflowsRoute,
   AuthenticatedPortalProjectsProjectIdRoute:
