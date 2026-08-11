@@ -43,16 +43,16 @@ function UsagePage() {
       {usage && (
         <>
           <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            <StatCard label="AI Requests" value={usage.ai_requests} hint="This month" />
-            <StatCard label="Chat Messages" value={usage.chat_messages} />
-            <StatCard label="Workflow Runs" value={usage.workflow_executions} />
-            <StatCard label="Documents Processed" value={usage.documents_processed} />
+            <StatCard label="AI Requests" value={usage.aiRequests} hint="This month" />
+            <StatCard label="Chat Messages" value={usage.chatMessages} />
+            <StatCard label="Workflow Runs" value={usage.workflowExecutions} />
+            <StatCard label="Documents Processed" value={usage.documentsProcessed} />
           </div>
 
           <div className="mt-4 grid gap-3 sm:grid-cols-3">
-            <StatCard label="Input Tokens" value={formatNumber(usage.input_tokens)} />
-            <StatCard label="Output Tokens" value={formatNumber(usage.output_tokens)} />
-            <StatCard label="Voice Calls" value={usage.voice_calls} />
+            <StatCard label="Input Tokens" value={formatNumber(usage.inputTokens)} />
+            <StatCard label="Output Tokens" value={formatNumber(usage.outputTokens)} />
+            <StatCard label="Voice Calls" value={usage.voiceCalls} />
           </div>
 
           <div className="mt-6 rounded-2xl border bg-card p-5">
