@@ -29,6 +29,7 @@ import { Route as AuthenticatedAdminLeadsRouteImport } from './routes/_authentic
 import { Route as AuthenticatedAdminCrmRouteImport } from './routes/_authenticated/admin.crm'
 import { Route as AuthenticatedDashboardAiIndexRouteImport } from './routes/_authenticated/dashboard.ai.index'
 import { Route as AuthenticatedPortalProjectsProjectIdRouteImport } from './routes/_authenticated/portal.projects.$projectId'
+import { Route as AuthenticatedDashboardAiKnowledgeRouteImport } from './routes/_authenticated/dashboard.ai.knowledge'
 import { Route as AuthenticatedDashboardAiChatbotsRouteImport } from './routes/_authenticated/dashboard.ai.chatbots'
 import { Route as AuthenticatedDashboardAiAssistantsRouteImport } from './routes/_authenticated/dashboard.ai.assistants'
 import { Route as AuthenticatedAdminLeadLeadIdRouteImport } from './routes/_authenticated/admin.lead.$leadId'
@@ -136,6 +137,12 @@ const AuthenticatedPortalProjectsProjectIdRoute =
     path: '/portal/projects/$projectId',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedDashboardAiKnowledgeRoute =
+  AuthenticatedDashboardAiKnowledgeRouteImport.update({
+    id: '/dashboard/ai/knowledge',
+    path: '/dashboard/ai/knowledge',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedDashboardAiChatbotsRoute =
   AuthenticatedDashboardAiChatbotsRouteImport.update({
     id: '/dashboard/ai/chatbots',
@@ -176,6 +183,7 @@ export interface FileRoutesByFullPath {
   '/admin/lead/$leadId': typeof AuthenticatedAdminLeadLeadIdRoute
   '/dashboard/ai/assistants': typeof AuthenticatedDashboardAiAssistantsRoute
   '/dashboard/ai/chatbots': typeof AuthenticatedDashboardAiChatbotsRoute
+  '/dashboard/ai/knowledge': typeof AuthenticatedDashboardAiKnowledgeRoute
   '/portal/projects/$projectId': typeof AuthenticatedPortalProjectsProjectIdRoute
   '/dashboard/ai/': typeof AuthenticatedDashboardAiIndexRoute
 }
@@ -200,6 +208,7 @@ export interface FileRoutesByTo {
   '/admin/lead/$leadId': typeof AuthenticatedAdminLeadLeadIdRoute
   '/dashboard/ai/assistants': typeof AuthenticatedDashboardAiAssistantsRoute
   '/dashboard/ai/chatbots': typeof AuthenticatedDashboardAiChatbotsRoute
+  '/dashboard/ai/knowledge': typeof AuthenticatedDashboardAiKnowledgeRoute
   '/portal/projects/$projectId': typeof AuthenticatedPortalProjectsProjectIdRoute
   '/dashboard/ai': typeof AuthenticatedDashboardAiIndexRoute
 }
@@ -226,6 +235,7 @@ export interface FileRoutesById {
   '/_authenticated/admin/lead/$leadId': typeof AuthenticatedAdminLeadLeadIdRoute
   '/_authenticated/dashboard/ai/assistants': typeof AuthenticatedDashboardAiAssistantsRoute
   '/_authenticated/dashboard/ai/chatbots': typeof AuthenticatedDashboardAiChatbotsRoute
+  '/_authenticated/dashboard/ai/knowledge': typeof AuthenticatedDashboardAiKnowledgeRoute
   '/_authenticated/portal/projects/$projectId': typeof AuthenticatedPortalProjectsProjectIdRoute
   '/_authenticated/dashboard/ai/': typeof AuthenticatedDashboardAiIndexRoute
 }
@@ -252,6 +262,7 @@ export interface FileRouteTypes {
     | '/admin/lead/$leadId'
     | '/dashboard/ai/assistants'
     | '/dashboard/ai/chatbots'
+    | '/dashboard/ai/knowledge'
     | '/portal/projects/$projectId'
     | '/dashboard/ai/'
   fileRoutesByTo: FileRoutesByTo
@@ -276,6 +287,7 @@ export interface FileRouteTypes {
     | '/admin/lead/$leadId'
     | '/dashboard/ai/assistants'
     | '/dashboard/ai/chatbots'
+    | '/dashboard/ai/knowledge'
     | '/portal/projects/$projectId'
     | '/dashboard/ai'
   id:
@@ -301,6 +313,7 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/lead/$leadId'
     | '/_authenticated/dashboard/ai/assistants'
     | '/_authenticated/dashboard/ai/chatbots'
+    | '/_authenticated/dashboard/ai/knowledge'
     | '/_authenticated/portal/projects/$projectId'
     | '/_authenticated/dashboard/ai/'
   fileRoutesById: FileRoutesById
@@ -463,6 +476,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedPortalProjectsProjectIdRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/dashboard/ai/knowledge': {
+      id: '/_authenticated/dashboard/ai/knowledge'
+      path: '/dashboard/ai/knowledge'
+      fullPath: '/dashboard/ai/knowledge'
+      preLoaderRoute: typeof AuthenticatedDashboardAiKnowledgeRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/dashboard/ai/chatbots': {
       id: '/_authenticated/dashboard/ai/chatbots'
       path: '/dashboard/ai/chatbots'
@@ -495,6 +515,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedAdminLeadLeadIdRoute: typeof AuthenticatedAdminLeadLeadIdRoute
   AuthenticatedDashboardAiAssistantsRoute: typeof AuthenticatedDashboardAiAssistantsRoute
   AuthenticatedDashboardAiChatbotsRoute: typeof AuthenticatedDashboardAiChatbotsRoute
+  AuthenticatedDashboardAiKnowledgeRoute: typeof AuthenticatedDashboardAiKnowledgeRoute
   AuthenticatedPortalProjectsProjectIdRoute: typeof AuthenticatedPortalProjectsProjectIdRoute
   AuthenticatedDashboardAiIndexRoute: typeof AuthenticatedDashboardAiIndexRoute
 }
@@ -508,6 +529,8 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedDashboardAiAssistantsRoute:
     AuthenticatedDashboardAiAssistantsRoute,
   AuthenticatedDashboardAiChatbotsRoute: AuthenticatedDashboardAiChatbotsRoute,
+  AuthenticatedDashboardAiKnowledgeRoute:
+    AuthenticatedDashboardAiKnowledgeRoute,
   AuthenticatedPortalProjectsProjectIdRoute:
     AuthenticatedPortalProjectsProjectIdRoute,
   AuthenticatedDashboardAiIndexRoute: AuthenticatedDashboardAiIndexRoute,
