@@ -29,7 +29,7 @@ function shell(title: string, inner: string) {
 <tr><td align="center" style="padding:32px 16px;">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:600px;border:1px solid #E2E8F0;border-radius:16px;overflow:hidden;">
 <tr><td style="background-color:${BRAND.dark};padding:24px 28px;">
-<div style="font-size:20px;font-weight:700;color:#ffffff;letter-spacing:-0.3px;">InstaLoop<span style="color:${BRAND.accent};">.</span> Automation</div>
+<div style="font-size:20px;font-weight:700;color:#ffffff;letter-spacing:-0.3px;">InstaLoop<span style="color:${BRAND.accent};">.</span></div>
 <div style="font-size:12px;color:#94A3B8;margin-top:4px;">${BRAND.tagline}</div>
 </td></tr>
 <tr><td style="padding:28px;">${inner}</td></tr>
@@ -60,7 +60,7 @@ export function customerConfirmationEmail(lead: LeadEmailData) {
     "We've received your consultation request",
     `<h1 style="margin:0 0 12px;font-size:24px;line-height:1.3;">Thank you, ${escapeHtml(lead.full_name.split(" ")[0])} 🎉</h1>
 <p style="margin:0 0 16px;font-size:15px;line-height:1.7;color:#334155;">
-We've received your consultation request for <strong style="color:${BRAND.primary};">${escapeHtml(lead.service)}</strong>. A InstaLoop automation specialist is reviewing your requirements now.
+We've received your consultation request for <strong style="color:${BRAND.primary};">${escapeHtml(lead.service)}</strong>. An InstaLoop automation specialist is reviewing your requirements now.
 </p>
 <div style="background-color:#F0FDF4;border:1px solid #BBF7D0;border-radius:12px;padding:16px 18px;margin:0 0 20px;">
 <div style="font-size:14px;font-weight:700;color:#15803D;">We'll get back to you within 24 hours.</div>
