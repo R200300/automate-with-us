@@ -116,7 +116,7 @@ function escapeCell(value: unknown) {
   return `"${raw.replace(/"/g, '""').replace(/\r?\n/g, " ")}"`;
 }
 
-export function exportLeadsCsv(leads: CrmLead[], filename = "nexora-leads.csv") {
+export function exportLeadsCsv(leads: CrmLead[], filename = "instaloop-leads.csv") {
   const header = CSV_COLUMNS.map((c) => escapeCell(c.label)).join(",");
   const rows = leads.map((lead) => CSV_COLUMNS.map((c) => escapeCell(lead[c.key])).join(","));
   const blob = new Blob([[header, ...rows].join("\n")], { type: "text/csv;charset=utf-8;" });

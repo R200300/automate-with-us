@@ -31,7 +31,7 @@ export function SiteFooter() {
             <span className="flex size-8 items-center justify-center rounded-xl bg-primary text-primary-foreground">
               <Sparkles className="size-4" />
             </span>
-            <span className="font-display text-base font-bold">Nexora Automation</span>
+            <span className="font-display text-base font-bold">InstaLoop</span>
           </Link>
           <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted-foreground">
             We help small and medium businesses save time and win more customers with AI voice agents,
@@ -74,7 +74,7 @@ export function SiteFooter() {
 
       <div className="border-t border-border">
         <div className="mx-auto flex w-full max-w-7xl flex-col gap-2 px-5 py-6 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between lg:px-8">
-          <p>© {new Date().getFullYear()} Nexora Automation. Founded by Ravishankar Sharma.</p>
+          <p>© {new Date().getFullYear()} InstaLoop. Founded by Ravishankar Sharma.</p>
           <p>Built for growing businesses in the USA, Canada, UK & Australia.</p>
         </div>
       </div>

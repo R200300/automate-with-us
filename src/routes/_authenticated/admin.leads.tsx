@@ -25,13 +25,13 @@ import {
 export const Route = createFileRoute("/_authenticated/admin/leads")({
   head: () => ({
     meta: [
-      { title: "Leads Dashboard | Nexora Automation" },
+      { title: "Leads Dashboard | InstaLoop" },
       {
         name: "description",
         content:
-          "Internal dashboard listing every consultation request submitted through the Nexora Automation website.",
+          "Internal dashboard listing every consultation request submitted through the InstaLoop website.",
       },
-      { property: "og:title", content: "Leads Dashboard | Nexora Automation" },
+      { property: "og:title", content: "Leads Dashboard | InstaLoop" },
       { property: "og:description", content: "Review incoming AI automation consultation requests." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

@@ -30,7 +30,7 @@ import {
 export const Route = createFileRoute("/_authenticated/dashboard/ai/knowledge")({
   head: () => ({
     meta: [
-      { title: "Knowledge Base — Nexora Automation" },
+      { title: "Knowledge Base — InstaLoop" },
       { name: "robots", content: "noindex" },
     ],
   }),

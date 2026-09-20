@@ -14,13 +14,13 @@ import { caseStudies, stats, trustBadges } from "@/data/site";
 export const Route = createFileRoute("/case-studies")({
   head: () => ({
     meta: [
-      { title: "AI Automation Case Studies & Results | Nexora Automation" },
+      { title: "AI Automation Case Studies & Results | InstaLoop" },
       {
         name: "description",
         content:
           "Real results from AI automation: +38 jobs booked, 72% tickets auto-resolved, 33% fewer no-shows. See how SMBs cut costs and win more leads.",
       },
-      { property: "og:title", content: "AI Automation Case Studies | Nexora Automation" },
+      { property: "og:title", content: "AI Automation Case Studies | InstaLoop" },
       {
         property: "og:description",
         content: "Measurable outcomes from AI voice agents, chatbots, and workflow automation projects.",

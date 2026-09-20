@@ -11,13 +11,13 @@ import { trustBadges } from "@/data/site";
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact Nexora Automation | Talk to an AI Automation Expert" },
+      { title: "Contact InstaLoop | Talk to an AI Automation Expert" },
       {
         name: "description",
         content:
-          "Contact Nexora Automation in Gurgaon, India. We reply within 24 hours to businesses in the USA, Canada, UK, and Australia. Ask us anything about AI automation.",
+          "Contact InstaLoop in Gurgaon, India. We reply within 24 hours to businesses in the USA, Canada, UK, and Australia. Ask us anything about AI automation.",
       },
-      { property: "og:title", content: "Contact Nexora Automation" },
+      { property: "og:title", content: "Contact InstaLoop" },
       {
         property: "og:description",
         content: "Send us a message and get a reply within one business day.",

@@ -309,7 +309,7 @@ export const runWorkflow = createServerFn({ method: "POST" })
               to,
               subject: config["subject"] || `Automation: ${workflow.name}`,
               heading: config["subject"] || workflow.name,
-              intro: config["body"] || "This message was sent by a Nexora automation workflow.",
+              intro: config["body"] || "This message was sent by an InstaLoop automation workflow.",
               idempotencyKey: `wf-${execution?.id ?? Date.now()}-${node.id}`,
             });
             steps.push({

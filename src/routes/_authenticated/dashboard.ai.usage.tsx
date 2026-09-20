@@ -8,7 +8,7 @@ import { AiShell, StatCard, formatNumber } from "@/components/ai/ai-shell";
 export const Route = createFileRoute("/_authenticated/dashboard/ai/usage")({
   head: () => ({
     meta: [
-      { title: "AI Usage — Nexora Automation" },
+      { title: "AI Usage — InstaLoop" },
       { name: "robots", content: "noindex" },
     ],
   }),

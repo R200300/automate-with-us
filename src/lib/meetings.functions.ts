@@ -121,7 +121,7 @@ async function notifyMeeting(
   if (ownerEmail) {
     await sendPortalEmail({
       to: ownerEmail,
-      subject: `${headings[kind]} | Nexora Automation`,
+      subject: `${headings[kind]} | InstaLoop`,
       heading: headings[kind],
       intro:
         kind === "cancelled"
@@ -274,9 +274,9 @@ export const updateMeetingDetails = createServerFn({ method: "POST" })
     if (email) {
       await sendPortalEmail({
         to: email,
-        subject: "Your meeting details were updated | Nexora Automation",
+        subject: "Your meeting details were updated | InstaLoop",
         heading: "Meeting details updated",
-        intro: "Your Nexora meeting has new details.",
+        intro: "Your InstaLoop meeting has new details.",
         rows: [
           ["Meeting", meeting.title],
           ["When (UTC)", new Date(meeting.scheduled_at).toUTCString()],

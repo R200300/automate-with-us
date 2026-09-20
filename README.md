@@ -1,4 +1,4 @@
-# Nexora Launchpad
+# InstaLoop Launchpad
 
 You are a world-class SaaS website copywriter, UI/UX strategist, brand consultant, and conversion rate optimization expert.
 
@@ -10,7 +10,7 @@ Your task is to create a complete, high-converting website for my AI Automation 
 
 Company Information:
 
-Company Name: Nexora Automation
+Company Name: InstaLoop
 
 Owner Name : Ravishankar Sharma 
 
@@ -122,7 +122,7 @@ Home Page Sections:
 
 3. Our Services
 
-4. Why Choose Nexora Automation
+4. Why Choose InstaLoop
 
 5. Industries We Serve
 

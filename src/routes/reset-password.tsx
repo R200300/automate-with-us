@@ -10,15 +10,15 @@ import { Label } from "@/components/ui/label";
 export const Route = createFileRoute("/reset-password")({
   head: () => ({
     meta: [
-      { title: "Set a New Password | Nexora Automation" },
+      { title: "Set a New Password | InstaLoop" },
       {
         name: "description",
-        content: "Choose a new password for your Nexora Automation client portal account.",
+        content: "Choose a new password for your InstaLoop client portal account.",
       },
-      { property: "og:title", content: "Set a New Password | Nexora Automation" },
+      { property: "og:title", content: "Set a New Password | InstaLoop" },
       {
         property: "og:description",
-        content: "Securely update the password for your Nexora Automation portal account.",
+        content: "Securely update the password for your InstaLoop portal account.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

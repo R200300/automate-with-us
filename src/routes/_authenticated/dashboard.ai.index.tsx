@@ -10,7 +10,7 @@ import { Progress } from "@/components/ui/progress";
 export const Route = createFileRoute("/_authenticated/dashboard/ai/")({
   head: () => ({
     meta: [
-      { title: "AI Automation Hub — Nexora Automation" },
+      { title: "AI Automation Hub — InstaLoop" },
       { name: "robots", content: "noindex" },
     ],
   }),

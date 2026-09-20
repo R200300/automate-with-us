@@ -157,7 +157,7 @@ export const createInvoice = createServerFn({ method: "POST" })
     });
     await sendPortalEmail({
       to: data.ownerEmail,
-      subject: `Invoice ${invoiceNumber} from Nexora Automation`,
+      subject: `Invoice ${invoiceNumber} from InstaLoop`,
       heading: `Invoice ${invoiceNumber}`,
       intro: "Your invoice is ready. You can view, download, or pay it in your client portal.",
       rows: [

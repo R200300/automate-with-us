@@ -158,7 +158,7 @@ export const testimonials = [
   },
   {
     quote:
-      "Nexora set up WhatsApp automation for our clinic. No-shows dropped by a third within six weeks.",
+      "InstaLoop set up WhatsApp automation for our clinic. No-shows dropped by a third within six weeks.",
     name: "Dr. Liam Carter",
     role: "Founder, Carter Dental — Sydney, Australia",
   },

@@ -37,7 +37,7 @@ export function SiteHeader() {
           <span className="flex size-8 items-center justify-center rounded-xl bg-primary text-primary-foreground">
             <Sparkles className="size-4" />
           </span>
-          <span className="font-display text-base font-bold tracking-tight">Nexora Automation</span>
+          <span className="font-display text-base font-bold tracking-tight">InstaLoop</span>
         </Link>
 
         <nav className="hidden items-center gap-1 lg:flex">

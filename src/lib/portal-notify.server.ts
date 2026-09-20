@@ -30,7 +30,7 @@ export function portalEmailHtml(params: {
 <body style="margin:0;background:#ffffff;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;color:${DARK};">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td align="center" style="padding:32px 16px;">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;text-align:left;">
-<tr><td style="padding-bottom:20px;font-size:15px;font-weight:800;color:${PRIMARY};">Nexora Automation</td></tr>
+<tr><td style="padding-bottom:20px;font-size:15px;font-weight:800;color:${PRIMARY};">InstaLoop</td></tr>
 <tr><td>
 <h1 style="margin:0 0 12px;font-size:22px;line-height:1.3;">${escapeHtml(params.heading)}</h1>
 <p style="margin:0 0 18px;font-size:14px;line-height:1.7;color:#334155;">${escapeHtml(params.intro)}</p>
@@ -40,7 +40,7 @@ ${
     ? `<a href="${escapeHtml(params.ctaUrl)}" style="display:inline-block;background:${PRIMARY};color:#ffffff;text-decoration:none;font-weight:700;font-size:14px;padding:12px 22px;border-radius:999px;">${escapeHtml(params.ctaLabel)}</a>`
     : ""
 }
-<p style="margin:20px 0 0;font-size:12px;color:#94A3B8;">${escapeHtml(params.footer ?? "Nexora Automation · Gurgaon, India")}</p>
+<p style="margin:20px 0 0;font-size:12px;color:#94A3B8;">${escapeHtml(params.footer ?? "InstaLoop · Gurgaon, India")}</p>
 </td></tr></table></td></tr></table></body></html>`;
 }
 

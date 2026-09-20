@@ -17,13 +17,13 @@ import { processSteps, stats, testimonials, trustBadges, whyUs } from "@/data/si
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About Nexora Automation | AI Agency Founded by Ravishankar Sharma" },
+      { title: "About InstaLoop | AI Agency Founded by Ravishankar Sharma" },
       {
         name: "description",
         content:
-          "Meet Nexora Automation — an AI automation agency in Gurgaon serving SMBs in the USA, UK, Canada, and Australia with practical, jargon-free AI systems.",
+          "Meet InstaLoop — an AI automation agency in Gurgaon serving SMBs in the USA, UK, Canada, and Australia with practical, jargon-free AI systems.",
       },
-      { property: "og:title", content: "About Nexora Automation" },
+      { property: "og:title", content: "About InstaLoop" },
       {
         property: "og:description",
         content: "Our mission, values, and the team helping small businesses put AI to work.",
@@ -37,7 +37,7 @@ export const Route = createFileRoute("/about")({
 
 const aboutFaqs = [
   {
-    q: "Where is Nexora Automation based?",
+    q: "Where is InstaLoop based?",
     a: "Our team is based in Sector 22, Gurgaon, Haryana, India, and we work with clients across the USA, Canada, UK, and Australia.",
   },
   {
@@ -64,7 +64,7 @@ function AboutPage() {
             We make AI <span className="text-gradient-brand">simple, useful, and profitable</span>
           </>
         }
-        subtitle="Nexora Automation was founded to give small and medium businesses the same automation power that big companies already enjoy — without the complexity or the enterprise price tag."
+        subtitle="InstaLoop was founded to give small and medium businesses the same automation power that big companies already enjoy — without the complexity or the enterprise price tag."
         secondaryCta={{ to: "/contact", label: "Contact Us" }}
       />
 
@@ -79,7 +79,7 @@ function AboutPage() {
               align="left"
               eyebrow="Our Story"
               title="Started by an operator, not a salesperson"
-              subtitle="Nexora Automation was founded by Ravishankar Sharma after watching capable teams lose hours every day to calls, follow-ups, and copy-paste work."
+              subtitle="InstaLoop was founded by Ravishankar Sharma after watching capable teams lose hours every day to calls, follow-ups, and copy-paste work."
             />
             <div className="mt-6 space-y-4 text-sm leading-relaxed text-muted-foreground">
               <p>
@@ -115,7 +115,7 @@ function AboutPage() {
             </div>
             <div className="mt-8 rounded-xl bg-surface p-5">
               <p className="text-sm font-semibold">Ravishankar Sharma</p>
-              <p className="text-xs text-muted-foreground">Founder, Nexora Automation</p>
+              <p className="text-xs text-muted-foreground">Founder, InstaLoop</p>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
                 “If an automation does not save you time or make you money, we should not build it.
                 That rule has guided every project we have shipped.”

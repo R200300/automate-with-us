@@ -42,13 +42,13 @@ import {
 export const Route = createFileRoute("/_authenticated/admin/lead/$leadId")({
   head: () => ({
     meta: [
-      { title: "Lead Profile | Nexora Automation CRM" },
+      { title: "Lead Profile | InstaLoop CRM" },
       {
         name: "description",
         content:
           "Full lead profile with pipeline stage, follow-ups, internal notes, tasks and activity history.",
       },
-      { property: "og:title", content: "Lead Profile | Nexora Automation CRM" },
+      { property: "og:title", content: "Lead Profile | InstaLoop CRM" },
       { property: "og:description", content: "Lead profile, notes, tasks and activity timeline." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

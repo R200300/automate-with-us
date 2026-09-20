@@ -6,13 +6,13 @@ import { posts, trustBadges } from "@/data/site";
 export const Route = createFileRoute("/blog")({
   head: () => ({
     meta: [
-      { title: "AI Automation Blog for Small Businesses | Nexora Automation" },
+      { title: "AI Automation Blog for Small Businesses | InstaLoop" },
       {
         name: "description",
         content:
           "Practical guides on AI voice agents, chatbots, WhatsApp automation, CRM cleanup, and calculating automation ROI for small and medium businesses.",
       },
-      { property: "og:title", content: "AI Automation Blog | Nexora Automation" },
+      { property: "og:title", content: "AI Automation Blog | InstaLoop" },
       {
         property: "og:description",
         content: "Simple, practical AI automation guides written for busy business owners.",
