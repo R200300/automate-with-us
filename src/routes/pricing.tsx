@@ -17,13 +17,13 @@ import { pricingPlans, processSteps, stats, testimonials, trustBadges } from "@/
 export const Route = createFileRoute("/pricing")({
   head: () => ({
     meta: [
-      { title: "Pricing | AI Automation Plans from $499/month | Nexora" },
+      { title: "Pricing | AI Automation Plans from $499/month | InstaLoop" },
       {
         name: "description",
         content:
           "Simple, fixed-price AI automation plans for SMBs. Starter from $1,200 setup + $499/mo, Growth from $3,500, and custom Scale plans. Free quote on your call.",
       },
-      { property: "og:title", content: "Pricing | Nexora Automation" },
+      { property: "og:title", content: "Pricing | InstaLoop" },
       {
         property: "og:description",
         content: "Transparent AI automation pricing with fixed quotes and no hourly surprises.",

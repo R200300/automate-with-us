@@ -59,7 +59,7 @@ export function BookingSuccessModal({ open, onOpenChange }: Props) {
             🎉 Consultation Request Submitted
           </DialogTitle>
           <DialogDescription className="mt-3 text-sm leading-relaxed text-muted-foreground">
-            Thank you for choosing Nexora Automation. We've received your consultation request
+            Thank you for choosing InstaLoop. We've received your consultation request
             successfully. Our team will review your requirements and contact you within 24 hours.
           </DialogDescription>
         </div>

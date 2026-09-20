@@ -16,13 +16,13 @@ import { industries, processSteps, stats, testimonials, trustBadges } from "@/da
 export const Route = createFileRoute("/industries")({
   head: () => ({
     meta: [
-      { title: "Industries We Serve | AI Automation for SMBs | Nexora" },
+      { title: "Industries We Serve | AI Automation for SMBs | InstaLoop" },
       {
         name: "description",
         content:
           "AI automation playbooks for real estate, clinics, home services, e-commerce, professional services, fitness, education, and logistics teams.",
       },
-      { property: "og:title", content: "Industries We Serve | Nexora Automation" },
+      { property: "og:title", content: "Industries We Serve | InstaLoop" },
       {
         property: "og:description",
         content: "Proven AI automation playbooks for eight industries across the USA, UK, Canada, and Australia.",

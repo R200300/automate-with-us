@@ -174,7 +174,7 @@ export const createTicket = createServerFn({ method: "POST" })
     if (clientEmail) {
       await sendPortalEmail({
         to: clientEmail,
-        subject: "We received your support ticket | Nexora Automation",
+        subject: "We received your support ticket | InstaLoop",
         heading: "We received your ticket",
         intro: "Our team replies within one business day. You can follow the thread in your portal.",
         rows: [["Subject", data.subject], ["Category", data.category]],

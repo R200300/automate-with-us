@@ -38,7 +38,7 @@ import {
 export const Route = createFileRoute("/_authenticated/dashboard/ai/prompts")({
   head: () => ({
     meta: [
-      { title: "Prompt Library — Nexora Automation" },
+      { title: "Prompt Library — InstaLoop" },
       { name: "robots", content: "noindex" },
     ],
   }),

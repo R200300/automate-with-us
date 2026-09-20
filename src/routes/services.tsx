@@ -21,9 +21,9 @@ export const Route = createFileRoute("/services")({
       {
         name: "description",
         content:
-          "Explore Nexora Automation services: AI voice agents, chatbots, support and lead automation, WhatsApp, CRM, email, and custom AI builds for SMBs.",
+          "Explore InstaLoop services: AI voice agents, chatbots, support and lead automation, WhatsApp, CRM, email, and custom AI builds for SMBs.",
       },
-      { property: "og:title", content: "AI Automation Services | Nexora Automation" },
+      { property: "og:title", content: "AI Automation Services | InstaLoop" },
       {
         property: "og:description",
         content:

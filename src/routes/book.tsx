@@ -30,13 +30,13 @@ import { services, stats, testimonials, trustBadges } from "@/data/site";
 export const Route = createFileRoute("/book")({
   head: () => ({
     meta: [
-      { title: "Book a Free AI Automation Consultation | Nexora Automation" },
+      { title: "Book a Free AI Automation Consultation | InstaLoop" },
       {
         name: "description",
         content:
           "Book a free 30-minute AI automation discovery call. Get an honest review of your process and a clear plan for what to automate first. No credit card needed.",
       },
-      { property: "og:title", content: "Book a Free Consultation | Nexora Automation" },
+      { property: "og:title", content: "Book a Free Consultation | InstaLoop" },
       {
         property: "og:description",
         content: "Free 30-minute discovery call with an AI automation expert. Walk away with a clear plan.",

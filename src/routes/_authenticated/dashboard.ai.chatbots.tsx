@@ -38,7 +38,7 @@ import {
 export const Route = createFileRoute("/_authenticated/dashboard/ai/chatbots")({
   head: () => ({
     meta: [
-      { title: "AI Chatbots — Nexora Automation" },
+      { title: "AI Chatbots — InstaLoop" },
       { name: "robots", content: "noindex" },
     ],
   }),

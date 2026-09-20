@@ -42,7 +42,7 @@ import {
 export const Route = createFileRoute("/_authenticated/dashboard/ai/workflows")({
   head: () => ({
     meta: [
-      { title: "Workflows — Nexora Automation" },
+      { title: "Workflows — InstaLoop" },
       { name: "robots", content: "noindex" },
     ],
   }),

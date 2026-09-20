@@ -10,16 +10,16 @@ import { Label } from "@/components/ui/label";
 export const Route = createFileRoute("/auth")({
   head: () => ({
     meta: [
-      { title: "Client Portal Sign In | Nexora Automation" },
+      { title: "Client Portal Sign In | InstaLoop" },
       {
         name: "description",
         content:
-          "Sign in to the Nexora Automation client portal to track your automation projects, progress, and team updates.",
+          "Sign in to the InstaLoop client portal to track your automation projects, progress, and team updates.",
       },
-      { property: "og:title", content: "Client Portal Sign In | Nexora Automation" },
+      { property: "og:title", content: "Client Portal Sign In | InstaLoop" },
       {
         property: "og:description",
-        content: "Secure sign in for Nexora Automation clients and team members.",
+        content: "Secure sign in for InstaLoop clients and team members.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -109,7 +109,7 @@ function AuthPage() {
     mode === "signin" ? "Sign in" : mode === "signup" ? "Create your account" : "Reset password";
   const subtitle =
     mode === "signin"
-      ? "Access your Nexora Automation client portal."
+      ? "Access your InstaLoop client portal."
       : mode === "signup"
         ? "Track your automation projects in one place."
         : "We'll email you a secure link to set a new password.";

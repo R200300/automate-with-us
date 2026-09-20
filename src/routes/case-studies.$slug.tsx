@@ -13,12 +13,12 @@ export const Route = createFileRoute("/case-studies/$slug")({
   head: ({ loaderData }) => {
     if (!loaderData) {
       return {
-        meta: [{ title: "Case Study Unavailable | Nexora Automation" }, { name: "robots", content: "noindex" }],
+        meta: [{ title: "Case Study Unavailable | InstaLoop" }, { name: "robots", content: "noindex" }],
       };
     }
     const { study } = loaderData;
-    const title = `${study.client} Case Study | Nexora Automation`;
-    const description = `How Nexora Automation helped ${study.client} (${study.industry}) — ${study.results
+    const title = `${study.client} Case Study | InstaLoop`;
+    const description = `How InstaLoop helped ${study.client} (${study.industry}) — ${study.results
       .map((r) => `${r.value} ${r.label}`)
       .join(", ")}.`;
     return {

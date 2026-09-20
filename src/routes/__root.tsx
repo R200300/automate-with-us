@@ -81,14 +81,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Nexora Automation — AI Automation Agency for Growing Businesses" },
+      { title: "InstaLoop — AI Automation Agency for Growing Businesses" },
       {
         name: "description",
         content:
-          "Nexora Automation builds AI voice agents, chatbots, and workflow automation for small and medium businesses in the USA, UK, Canada, and Australia.",
+          "InstaLoop builds AI voice agents, chatbots, and workflow automation for small and medium businesses in the USA, UK, Canada, and Australia.",
       },
       { name: "author", content: "Ravishankar Sharma" },
-      { property: "og:site_name", content: "Nexora Automation" },
+      { property: "og:site_name", content: "InstaLoop" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -108,7 +108,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Organization",
-          name: "Nexora Automation",
+          name: "InstaLoop",
           founder: { "@type": "Person", name: "Ravishankar Sharma" },
           address: {
             "@type": "PostalAddress",

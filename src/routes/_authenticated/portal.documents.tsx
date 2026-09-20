@@ -111,7 +111,7 @@ function DocumentCenter() {
       <div className="surface-card mt-8 p-6">
         <h2 className="font-display text-lg font-semibold">Upload a document</h2>
         <p className="mt-1 text-sm text-muted-foreground">
-          PDF, images, spreadsheets and docs up to 20MB. Only you and the Nexora team can open them.
+          PDF, images, spreadsheets and docs up to 20MB. Only you and the InstaLoop team can open them.
         </p>
         <div className="mt-5 grid gap-3 sm:grid-cols-3">
           <Select value={category} onValueChange={(v) => setCategory(v as typeof category)}>

@@ -49,13 +49,13 @@ import {
 export const Route = createFileRoute("/_authenticated/admin/crm")({
   head: () => ({
     meta: [
-      { title: "CRM Pipeline | Nexora Automation" },
+      { title: "CRM Pipeline | InstaLoop" },
       {
         name: "description",
         content:
-          "Internal CRM pipeline for Nexora Automation: track every consultation lead from first contact to won or lost.",
+          "Internal CRM pipeline for InstaLoop: track every consultation lead from first contact to won or lost.",
       },
-      { property: "og:title", content: "CRM Pipeline | Nexora Automation" },
+      { property: "og:title", content: "CRM Pipeline | InstaLoop" },
       { property: "og:description", content: "Track AI automation leads through the full sales pipeline." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -330,7 +330,7 @@ function CrmPage() {
               size="sm"
               className="rounded-full"
               disabled={selectedLeads.length === 0}
-              onClick={() => exportLeadsCsv(selectedLeads, "nexora-selected-leads.csv")}
+              onClick={() => exportLeadsCsv(selectedLeads, "instaloop-selected-leads.csv")}
             >
               <Download className="size-4" /> Export selected
             </Button>

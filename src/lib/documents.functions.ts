@@ -100,9 +100,9 @@ export const createDocument = createServerFn({ method: "POST" })
       if (email) {
         await sendPortalEmail({
           to: email,
-          subject: "A new document was shared with you | Nexora Automation",
+          subject: "A new document was shared with you | InstaLoop",
           heading: "New document shared",
-          intro: `${data.name} has been added to your Nexora client portal.`,
+          intro: `${data.name} has been added to your InstaLoop client portal.`,
           rows: [["Document", data.name], ["Category", data.category]],
           ctaLabel: "Open document centre",
           ctaUrl: "https://automate-with-us.lovable.app/portal/documents",

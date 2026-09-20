@@ -28,13 +28,13 @@ import {
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "AI Automation Agency for Small Business | Nexora Automation" },
+      { title: "AI Automation Agency for Small Business | InstaLoop" },
       {
         name: "description",
         content:
-          "Nexora Automation builds AI voice agents, chatbots, and workflow automation that save SMBs 18+ hours a week. Book a free discovery call today.",
+          "InstaLoop builds AI voice agents, chatbots, and workflow automation that save SMBs 18+ hours a week. Book a free discovery call today.",
       },
-      { property: "og:title", content: "AI Automation Agency for Small Business | Nexora Automation" },
+      { property: "og:title", content: "AI Automation Agency for Small Business | InstaLoop" },
       {
         property: "og:description",
         content:
@@ -129,11 +129,11 @@ function Home() {
         </div>
       </Section>
 
-      {/* 4. Why Choose Nexora */}
+      {/* 4. Why Choose InstaLoop */}
       <Section muted>
         <SectionHeading
-          eyebrow="Why Nexora"
-          title="Why growing businesses choose Nexora Automation"
+          eyebrow="Why InstaLoop"
+          title="Why growing businesses choose InstaLoop"
           subtitle="We are not a software vendor. We are the team that studies your process, builds the system, and stays with you after launch."
         />
         <div className="mt-12">
@@ -211,19 +211,19 @@ function Home() {
               {[
                 { who: "Caller", text: "Hi, do you handle emergency leaks on weekends?" },
                 {
-                  who: "Nexora AI",
+                  who: "InstaLoop AI",
                   text: "Yes, we do. I can get a technician to you today. What's your postcode?",
                 },
                 { who: "Caller", text: "It's SW1A 2AA." },
                 {
-                  who: "Nexora AI",
+                  who: "InstaLoop AI",
                   text: "Great — I have a 4:30pm slot. Shall I lock it in and text you the confirmation?",
                 },
               ].map((m, i) => (
                 <div
                   key={i}
                   className={`max-w-[85%] rounded-2xl px-4 py-2.5 text-sm ${
-                    m.who === "Nexora AI"
+                    m.who === "InstaLoop AI"
                       ? "ml-auto bg-primary text-primary-foreground"
                       : "bg-secondary text-secondary-foreground"
                   }`}
