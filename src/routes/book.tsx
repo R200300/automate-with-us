@@ -10,7 +10,9 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { BookingSuccessModal } from "@/components/booking-success-modal";
+import { SlotPicker } from "@/components/slot-picker";
 import { submitLead } from "@/lib/leads.functions";
+import { bookDiscoveryCall, type BookedCall } from "@/lib/calcom.functions";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -97,11 +99,16 @@ function validate(form: FormState): FieldErrors {
 
 function BookPage() {
   const submitRequest = useServerFn(submitLead);
+  const confirmCall = useServerFn(bookDiscoveryCall);
   const [form, setForm] = useState<FormState>(emptyForm);
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [slot, setSlot] = useState<string | null>(null);
+  const [slotError, setSlotError] = useState<string | null>(null);
+  const [booking, setBooking] = useState<BookedCall | null>(null);
+  const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC";
 
   const update = (key: keyof FormState) => (value: string) => {
     setForm((prev) => ({ ...prev, [key]: value }));
