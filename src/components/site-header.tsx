@@ -1,8 +1,9 @@
 import { Link } from "@tanstack/react-router";
-import { Menu, X, Sparkles } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/theme-toggle";
+import instaLoopLogo from "@/assets/instaloop-logo.png";
 
 const nav = [
   { to: "/", label: "Home" },
@@ -33,10 +34,13 @@ export function SiteHeader() {
       }`}
     >
       <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-5 lg:px-8">
-        <Link to="/" className="flex items-center gap-2" onClick={() => setOpen(false)}>
-          <span className="flex size-8 items-center justify-center rounded-xl bg-primary text-primary-foreground">
-            <Sparkles className="size-4" />
-          </span>
+        <Link to="/" className="flex items-center gap-2.5" onClick={() => setOpen(false)}>
+          <img
+            src={instaLoopLogo}
+            alt=""
+            aria-hidden="true"
+            className="h-9 w-auto shrink-0 object-contain"
+          />
           <span className="font-display text-base font-bold tracking-tight">InstaLoop</span>
         </Link>
 
