@@ -121,11 +121,26 @@ function BookPage() {
 
     const errors = validate(form);
     setFieldErrors(errors);
+    setSlotError(null);
     if (Object.keys(errors).length > 0) return;
+    if (!slot) {
+      setSlotError("Please pick a time for your call.");
+      return;
+    }
 
     setSubmitting(true);
     setError(null);
     try {
+      const confirmed = await confirmCall({
+        data: {
+          start: slot,
+          name: form.fullName.trim(),
+          email: form.email.trim(),
+          timeZone,
+          phone: form.phone.trim(),
+          notes: `${form.companyName.trim()} · ${form.service.trim()} · ${form.country.trim()}\n\n${form.projectDescription.trim()}`,
+        },
+      });
       await submitRequest({
         data: {
           fullName: form.fullName.trim(),
