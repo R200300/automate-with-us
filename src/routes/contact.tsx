@@ -71,7 +71,7 @@ function ContactPage() {
             <div className="mt-8 space-y-5">
               {[
                 { icon: MapPin, label: "Office", value: "Sector 22, Gurgaon, Haryana, India 122015" },
-                { icon: Mail, label: "Email", value: "hello@nexoraautomation.com" },
+                { icon: Mail, label: "Email", value: "sales.leadforgeai@gmail.com" },
                 { icon: Phone, label: "Phone / WhatsApp", value: "+91 98765 43210" },
                 { icon: Clock, label: "Response time", value: "Within 1 business day" },
                 { icon: MessageSquare, label: "Regions served", value: "USA · Canada · UK · Australia" },

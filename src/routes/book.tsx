@@ -159,7 +159,7 @@ function BookPage() {
       setError(
         err instanceof Error && err.message
           ? err.message
-          : "Something went wrong while sending your request. Please try again or email hello@nexoraautomation.com.",
+          : "Something went wrong while sending your request. Please try again or email sales.leadforgeai@gmail.com.",
       );
     } finally {
       setSubmitting(false);
@@ -343,7 +343,7 @@ function BookPage() {
           </DialogHeader>
           <p className="text-xs text-muted-foreground">
             Your details are still in the form — nothing was lost. Fix the issue above and try again,
-            or email hello@nexoraautomation.com.
+            or email sales.leadforgeai@gmail.com.
           </p>
           <Button className="rounded-full" onClick={() => setError(null)}>
             Try Again

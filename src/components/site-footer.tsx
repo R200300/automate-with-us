@@ -44,7 +44,7 @@ export function SiteFooter() {
             </p>
             <p className="flex items-center gap-2">
               <Mail className="size-4 shrink-0 text-primary" />
-              hello@nexoraautomation.com
+              sales.leadforgeai@gmail.com
             </p>
             <p className="flex items-center gap-2">
               <Phone className="size-4 shrink-0 text-primary" />
