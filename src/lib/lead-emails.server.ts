@@ -8,6 +8,7 @@ const BRAND = {
   accent: "#22C55E",
   address: "Sector 22, Gurgaon, Haryana, India 122015",
   replyTo: "sales.leadforgeai@gmail.com",
+  ownerEmail: "sales.leadforgeai@gmail.com",
 };
 
 export interface LeadEmailData {
@@ -57,14 +58,14 @@ function row(label: string, value: string) {
 
 export function customerConfirmationEmail(lead: LeadEmailData) {
   const html = shell(
-    "We've received your consultation request",
-    `<h1 style="margin:0 0 12px;font-size:24px;line-height:1.3;">Thank you, ${escapeHtml(lead.full_name.split(" ")[0])} 🎉</h1>
+    "Your discovery call is confirmed",
+    `<h1 style="margin:0 0 12px;font-size:24px;line-height:1.3;">Your discovery call is confirmed ✅</h1>
 <p style="margin:0 0 16px;font-size:15px;line-height:1.7;color:#334155;">
-We've received your consultation request for <strong style="color:${BRAND.primary};">${escapeHtml(lead.service)}</strong>. An InstaLoop automation specialist is reviewing your requirements now.
+Hi ${escapeHtml(lead.full_name.split(" ")[0])}, your consultation request has been received and your selected time is now confirmed.
 </p>
-<div style="background-color:#F0FDF4;border:1px solid #BBF7D0;border-radius:12px;padding:16px 18px;margin:0 0 20px;">
-<div style="font-size:14px;font-weight:700;color:#15803D;">We'll get back to you within 24 hours.</div>
-<div style="font-size:13px;color:#166534;margin-top:4px;">Usually much sooner during business hours.</div>
+<div style="background-color:#EFF6FF;border:1px solid #BFDBFE;border-radius:12px;padding:16px 18px;margin:0 0 20px;">
+<div style="font-size:14px;font-weight:700;color:${BRAND.primary};">Appointment booked</div>
+<div style="font-size:13px;color:#1E40AF;margin-top:4px;">Your calendar booking has been created successfully.</div>
 </div>
 <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="margin:0 0 20px;">
 ${row("Name", lead.full_name)}
@@ -73,19 +74,12 @@ ${row("Service", lead.service)}
 ${row("Phone", lead.phone)}
 ${row("Country", lead.country)}
 </table>
-<p style="margin:0 0 8px;font-size:14px;font-weight:700;">What happens next</p>
-<p style="margin:0 0 20px;font-size:14px;line-height:1.8;color:#334155;">
-1. We review your process and prepare ideas.<br/>
-2. A specialist contacts you to confirm a time.<br/>
-3. We run your free 30-minute discovery call.
-</p>
-<p style="margin:0;font-size:13px;color:#64748B;">Need to add something? Just reply to this email.</p>`,
+<p style="margin:0;font-size:13px;color:#64748B;">Need to change anything? Reply to this email.</p>`,
   );
 
-  const text = `Thank you, ${lead.full_name}.
+  const text = `Hi ${lead.full_name},
 
-We've received your consultation request for ${lead.service}.
-Our team will contact you within 24 hours.
+Your InstaLoop consultation request has been received and your selected appointment time is now confirmed.
 
 Name: ${lead.full_name}
 Company: ${lead.company_name}
@@ -96,17 +90,21 @@ Country: ${lead.country}
 - InstaLoop`;
 
   return {
-    subject: "We've received your consultation request | InstaLoop",
+    subject: "Your appointment is confirmed | InstaLoop",
     html,
     text,
   };
 }
 
-export function ownerNotificationEmail(lead: LeadEmailData) {
+export function ownerNotificationEmail(
+  lead: LeadEmailData,
+  appointment?: { startsAt: string; endsAt?: string; meetingUrl?: string | null; bookingUid?: string },
+) {
+  const when = appointment ? new Date(appointment.startsAt).toUTCString() : new Date(lead.created_at).toUTCString();
   const html = shell(
-    "New lead received",
-    `<h1 style="margin:0 0 12px;font-size:22px;line-height:1.3;">New lead received</h1>
-<p style="margin:0 0 20px;font-size:14px;color:#334155;">A new consultation request just came in from the website.</p>
+    "New appointment booked",
+    `<h1 style="margin:0 0 12px;font-size:22px;line-height:1.3;">New appointment booked 🚀</h1>
+<p style="margin:0 0 20px;font-size:14px;color:#334155;">A customer booked a consultation through the website.</p>
 <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="margin:0 0 20px;">
 ${row("Full name", lead.full_name)}
 ${row("Company", lead.company_name)}
@@ -114,14 +112,17 @@ ${row("Email", lead.email)}
 ${row("Phone", lead.phone)}
 ${row("Country", lead.country)}
 ${row("Service", lead.service)}
-${row("Submitted", new Date(lead.created_at).toUTCString())}
+${row("Appointment", when)}
+${appointment?.endsAt ? row("Ends", new Date(appointment.endsAt).toUTCString()) : ""}
+${appointment?.meetingUrl ? row("Meeting link", appointment.meetingUrl) : ""}
+${appointment?.bookingUid ? row("Booking ID", appointment.bookingUid) : ""}
 ${row("Project description", lead.project_description)}
 ${row("Lead ID", lead.id)}
 </table>
-<p style="margin:0;font-size:13px;color:#64748B;">Open the leads dashboard at /admin/leads to update the status.</p>`,
+<p style="margin:0;font-size:13px;color:#64748B;">Open the leads dashboard at /admin/leads for the full record.</p>`,
   );
 
-  const text = `New lead received
+  const text = `New appointment booked
 
 Name: ${lead.full_name}
 Company: ${lead.company_name}
@@ -129,48 +130,19 @@ Email: ${lead.email}
 Phone: ${lead.phone}
 Country: ${lead.country}
 Service: ${lead.service}
-Submitted: ${lead.created_at}
-Project description: ${lead.project_description}
+Appointment: ${when}
+${appointment?.meetingUrl ? `Meeting link: ${appointment.meetingUrl}\n` : ""}${appointment?.bookingUid ? `Booking ID: ${appointment.bookingUid}\n` : ""}Project description: ${lead.project_description}
 Lead ID: ${lead.id}`;
 
-  return { subject: "New Lead Received – InstaLoop", html, text };
-}
-
-export function meetingConfirmationEmail(
-  lead: LeadEmailData,
-  startsAt: string,
-  eventLink: string | null,
-) {
-  const when = new Date(startsAt).toUTCString();
-  const html = shell(
-    "Your discovery call is booked",
-    `<h1 style="margin:0 0 12px;font-size:24px;line-height:1.3;">Your discovery call is booked ✅</h1>
-<p style="margin:0 0 16px;font-size:15px;line-height:1.7;color:#334155;">
-Hi ${escapeHtml(lead.full_name.split(" ")[0])}, your free 30-minute call with InstaLoop is confirmed.
-</p>
-<div style="background-color:#EFF6FF;border:1px solid #BFDBFE;border-radius:12px;padding:16px 18px;margin:0 0 20px;">
-<div style="font-size:14px;font-weight:700;color:${BRAND.primary};">${escapeHtml(when)}</div>
-<div style="font-size:13px;color:#1E40AF;margin-top:4px;">30 minutes · Google Meet</div>
-</div>
-${
-  eventLink
-    ? `<a href="${escapeHtml(eventLink)}" style="display:inline-block;background-color:${BRAND.primary};color:#ffffff;text-decoration:none;font-weight:700;font-size:14px;padding:12px 22px;border-radius:999px;">View calendar invite</a>`
-    : ""
-}
-<p style="margin:20px 0 0;font-size:13px;color:#64748B;">Need to reschedule? Just reply to this email.</p>`,
-  );
-  const text = `Your discovery call with InstaLoop is confirmed for ${when}.${eventLink ? `\nCalendar invite: ${eventLink}` : ""}`;
-  return { subject: "Your discovery call is confirmed | InstaLoop", html, text };
+  return { subject: "New Appointment Booked – InstaLoop", html, text };
 }
 
 export function getEmailConfig() {
   const apiKey = process.env.LOVABLE_API_KEY;
   const senderDomain = process.env.SENDER_DOMAIN;
-  const ownerEmail = process.env.OWNER_NOTIFICATION_EMAIL;
-  return { apiKey, senderDomain, ownerEmail };
+  return { apiKey, senderDomain, ownerEmail: BRAND.ownerEmail };
 }
 
-/** Sends through Lovable's managed email API. Throws with a readable reason on failure. */
 export async function sendLeadEmail(params: {
   to: string;
   subject: string;
@@ -180,10 +152,11 @@ export async function sendLeadEmail(params: {
 }) {
   const { apiKey, senderDomain } = getEmailConfig();
   if (!apiKey) throw new Error("Email service is not configured (missing API key).");
-  if (!senderDomain)
+  if (!senderDomain) {
     throw new Error(
-      "No verified sender domain is configured yet, so emails cannot be delivered. Set up the email domain in Cloud → Emails.",
+      "No verified sender domain is configured yet, so emails cannot be delivered. Set up a verified sender domain.",
     );
+  }
 
   const result = await sendLovableEmail(
     {
