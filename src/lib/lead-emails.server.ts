@@ -7,7 +7,7 @@ const BRAND = {
   dark: "#0F172A",
   accent: "#22C55E",
   address: "Sector 22, Gurgaon, Haryana, India 122015",
-  replyTo: "hello@nexoraautomation.com",
+  replyTo: "sales.leadforgeai@gmail.com",
 };
 
 export interface LeadEmailData {
