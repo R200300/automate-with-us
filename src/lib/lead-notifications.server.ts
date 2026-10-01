@@ -24,7 +24,7 @@ export async function logActivity(
   if (error) console.error("[lead_activity] insert failed", error);
 }
 
-async function attempt(
+async function sendWithRetry(
   lead: LeadEmailData,
   kind: "customer" | "owner",
   to: string,
@@ -32,52 +32,60 @@ async function attempt(
   attemptsSoFar: number,
 ) {
   const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-  const prefix = kind === "customer" ? "customer" : "owner";
   const maxAttempts = 3;
   let lastError = "";
 
   for (let i = 0; i < maxAttempts; i++) {
     try {
-      await sendLeadEmail({ ...payload, to, idempotencyKey: `${prefix}-${lead.id}` });
+      await sendLeadEmail({
+        ...payload,
+        to,
+        idempotencyKey: `lead-email-${kind}-${lead.id}`,
+      });
       await supabaseAdmin
         .from("leads")
         .update({
-          [`${prefix}_email_status`]: "sent",
-          [`${prefix}_email_attempts`]: attemptsSoFar + i + 1,
-          [`${prefix}_email_error`]: null,
+          [`${kind}_email_status`]: "sent",
+          [`${kind}_email_attempts`]: attemptsSoFar + i + 1,
+          [`${kind}_email_error`]: null,
         } as never)
         .eq("id", lead.id);
       await logActivity(lead.id, "email_sent", `${kind === "customer" ? "Customer confirmation" : "Internal notification"} email sent to ${to}.`, { kind, to });
       return true;
     } catch (err) {
       lastError = err instanceof Error ? err.message : String(err);
-      // Retry only transient failures; configuration problems will not fix themselves.
-      if (/not configured|sender domain/i.test(lastError)) break;
-      await new Promise((r) => setTimeout(r, 400 * (i + 1)));
+      if (/not configured|verified sender|missing api key/i.test(lastError)) break;
+      if (i < maxAttempts - 1) await new Promise((r) => setTimeout(r, 500 * (i + 1)));
     }
   }
 
   await supabaseAdmin
     .from("leads")
     .update({
-      [`${prefix}_email_status`]: "failed",
-      [`${prefix}_email_attempts`]: attemptsSoFar + maxAttempts,
-      [`${prefix}_email_error`]: lastError,
+      [`${kind}_email_status`]: "failed",
+      [`${kind}_email_attempts`]: attemptsSoFar + maxAttempts,
+      [`${kind}_email_error`]: lastError,
     } as never)
     .eq("id", lead.id);
   await logActivity(lead.id, "email_failed", `${kind === "customer" ? "Customer confirmation" : "Internal notification"} email failed: ${lastError}`, { kind, to, error: lastError });
   return false;
 }
 
-/** Best-effort: never throws, so a failed email can never lose the lead. */
-export async function dispatchLeadEmails(lead: LeadEmailData, attemptsSoFar = 0) {
+export async function dispatchLeadEmails(
+  lead: LeadEmailData,
+  attemptsSoFar = 0,
+  appointment?: { startsAt: string; endsAt?: string; meetingUrl?: string | null; bookingUid?: string },
+) {
   const { ownerEmail } = getEmailConfig();
-
   const results = await Promise.allSettled([
-    attempt(lead, "customer", lead.email, customerConfirmationEmail(lead), attemptsSoFar),
-    ownerEmail
-      ? attempt(lead, "owner", ownerEmail, ownerNotificationEmail(lead), attemptsSoFar)
-      : Promise.resolve(false),
+    sendWithRetry(lead, "customer", lead.email, customerConfirmationEmail(lead), attemptsSoFar),
+    sendWithRetry(
+      lead,
+      "owner",
+      ownerEmail,
+      ownerNotificationEmail(lead, appointment),
+      attemptsSoFar,
+    ),
   ]);
 
   return {
