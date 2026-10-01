@@ -9,88 +9,39 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
-import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
-import { Route as AboutRouteImport } from './routes/about'
-import { Route as AuthRouteImport } from './routes/auth'
-import { Route as BlogRouteImport } from './routes/blog'
-import { Route as BookRouteImport } from './routes/book'
-import { Route as CaseStudiesRouteImport } from './routes/case-studies'
-import { Route as ContactRouteImport } from './routes/contact'
-import { Route as IndustriesRouteImport } from './routes/industries'
-import { Route as PricingRouteImport } from './routes/pricing'
-import { Route as ResetPasswordRouteImport } from './routes/reset-password'
-import { Route as ServicesRouteImport } from './routes/services'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as ServicesRouteImport } from './routes/services'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
+import { Route as PricingRouteImport } from './routes/pricing'
+import { Route as IndustriesRouteImport } from './routes/industries'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as CaseStudiesRouteImport } from './routes/case-studies'
+import { Route as BookRouteImport } from './routes/book'
+import { Route as BlogRouteImport } from './routes/blog'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as IndexRouteImport } from './routes/index'
 import { Route as CaseStudiesSlugRouteImport } from './routes/case-studies.$slug'
-import { Route as AuthenticatedAdminCrmRouteImport } from './routes/_authenticated/admin.crm'
-import { Route as AuthenticatedAdminLeadsRouteImport } from './routes/_authenticated/admin.leads'
 import { Route as AuthenticatedPortalIndexRouteImport } from './routes/_authenticated/portal.index'
 import { Route as AuthenticatedPortalDocumentsRouteImport } from './routes/_authenticated/portal.documents'
-import { Route as AuthenticatedAdminLeadLeadIdRouteImport } from './routes/_authenticated/admin.lead.$leadId'
+import { Route as AuthenticatedAdminLeadsRouteImport } from './routes/_authenticated/admin.leads'
+import { Route as AuthenticatedAdminCrmRouteImport } from './routes/_authenticated/admin.crm'
 import { Route as AuthenticatedDashboardAiIndexRouteImport } from './routes/_authenticated/dashboard.ai.index'
-import { Route as AuthenticatedDashboardAiActivityRouteImport } from './routes/_authenticated/dashboard.ai.activity'
-import { Route as AuthenticatedDashboardAiAssistantsRouteImport } from './routes/_authenticated/dashboard.ai.assistants'
-import { Route as AuthenticatedDashboardAiChatbotsRouteImport } from './routes/_authenticated/dashboard.ai.chatbots'
-import { Route as AuthenticatedDashboardAiKnowledgeRouteImport } from './routes/_authenticated/dashboard.ai.knowledge'
-import { Route as AuthenticatedDashboardAiPromptsRouteImport } from './routes/_authenticated/dashboard.ai.prompts'
-import { Route as AuthenticatedDashboardAiUsageRouteImport } from './routes/_authenticated/dashboard.ai.usage'
-import { Route as AuthenticatedDashboardAiVoiceRouteImport } from './routes/_authenticated/dashboard.ai.voice'
-import { Route as AuthenticatedDashboardAiWorkflowsRouteImport } from './routes/_authenticated/dashboard.ai.workflows'
 import { Route as AuthenticatedPortalProjectsProjectIdRouteImport } from './routes/_authenticated/portal.projects.$projectId'
+import { Route as AuthenticatedDashboardAiWorkflowsRouteImport } from './routes/_authenticated/dashboard.ai.workflows'
+import { Route as AuthenticatedDashboardAiVoiceRouteImport } from './routes/_authenticated/dashboard.ai.voice'
+import { Route as AuthenticatedDashboardAiUsageRouteImport } from './routes/_authenticated/dashboard.ai.usage'
+import { Route as AuthenticatedDashboardAiPromptsRouteImport } from './routes/_authenticated/dashboard.ai.prompts'
+import { Route as AuthenticatedDashboardAiKnowledgeRouteImport } from './routes/_authenticated/dashboard.ai.knowledge'
+import { Route as AuthenticatedDashboardAiChatbotsRouteImport } from './routes/_authenticated/dashboard.ai.chatbots'
+import { Route as AuthenticatedDashboardAiAssistantsRouteImport } from './routes/_authenticated/dashboard.ai.assistants'
+import { Route as AuthenticatedDashboardAiActivityRouteImport } from './routes/_authenticated/dashboard.ai.activity'
+import { Route as AuthenticatedAdminLeadLeadIdRouteImport } from './routes/_authenticated/admin.lead.$leadId'
 
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
-  id: '/_authenticated',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AboutRoute = AboutRouteImport.update({
-  id: '/about',
-  path: '/about',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AuthRoute = AuthRouteImport.update({
-  id: '/auth',
-  path: '/auth',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BlogRoute = BlogRouteImport.update({
-  id: '/blog',
-  path: '/blog',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BookRoute = BookRouteImport.update({
-  id: '/book',
-  path: '/book',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CaseStudiesRoute = CaseStudiesRouteImport.update({
-  id: '/case-studies',
-  path: '/case-studies',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ContactRoute = ContactRouteImport.update({
-  id: '/contact',
-  path: '/contact',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const IndustriesRoute = IndustriesRouteImport.update({
-  id: '/industries',
-  path: '/industries',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PricingRoute = PricingRouteImport.update({
-  id: '/pricing',
-  path: '/pricing',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ResetPasswordRoute = ResetPasswordRouteImport.update({
-  id: '/reset-password',
-  path: '/reset-password',
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ServicesRoute = ServicesRouteImport.update({
@@ -98,25 +49,64 @@ const ServicesRoute = ServicesRouteImport.update({
   path: '/services',
   getParentRoute: () => rootRouteImport,
 } as any)
-const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
-  id: '/sitemap.xml',
-  path: '/sitemap.xml',
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PricingRoute = PricingRouteImport.update({
+  id: '/pricing',
+  path: '/pricing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IndustriesRoute = IndustriesRouteImport.update({
+  id: '/industries',
+  path: '/industries',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CaseStudiesRoute = CaseStudiesRouteImport.update({
+  id: '/case-studies',
+  path: '/case-studies',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BookRoute = BookRouteImport.update({
+  id: '/book',
+  path: '/book',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogRoute = BlogRouteImport.update({
+  id: '/blog',
+  path: '/blog',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CaseStudiesSlugRoute = CaseStudiesSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
   getParentRoute: () => CaseStudiesRoute,
-} as any)
-const AuthenticatedAdminCrmRoute = AuthenticatedAdminCrmRouteImport.update({
-  id: '/admin/crm',
-  path: '/admin/crm',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const AuthenticatedAdminLeadsRoute = AuthenticatedAdminLeadsRouteImport.update({
-  id: '/admin/leads',
-  path: '/admin/leads',
-  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedPortalIndexRoute =
   AuthenticatedPortalIndexRouteImport.update({
@@ -130,58 +120,26 @@ const AuthenticatedPortalDocumentsRoute =
     path: '/portal/documents',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
-const AuthenticatedAdminLeadLeadIdRoute =
-  AuthenticatedAdminLeadLeadIdRouteImport.update({
-    id: '/admin/lead/$leadId',
-    path: '/admin/lead/$leadId',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
+const AuthenticatedAdminLeadsRoute = AuthenticatedAdminLeadsRouteImport.update({
+  id: '/admin/leads',
+  path: '/admin/leads',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedAdminCrmRoute = AuthenticatedAdminCrmRouteImport.update({
+  id: '/admin/crm',
+  path: '/admin/crm',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedDashboardAiIndexRoute =
   AuthenticatedDashboardAiIndexRouteImport.update({
     id: '/dashboard/ai/',
     path: '/dashboard/ai/',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
-const AuthenticatedDashboardAiActivityRoute =
-  AuthenticatedDashboardAiActivityRouteImport.update({
-    id: '/dashboard/ai/activity',
-    path: '/dashboard/ai/activity',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-const AuthenticatedDashboardAiAssistantsRoute =
-  AuthenticatedDashboardAiAssistantsRouteImport.update({
-    id: '/dashboard/ai/assistants',
-    path: '/dashboard/ai/assistants',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-const AuthenticatedDashboardAiChatbotsRoute =
-  AuthenticatedDashboardAiChatbotsRouteImport.update({
-    id: '/dashboard/ai/chatbots',
-    path: '/dashboard/ai/chatbots',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-const AuthenticatedDashboardAiKnowledgeRoute =
-  AuthenticatedDashboardAiKnowledgeRouteImport.update({
-    id: '/dashboard/ai/knowledge',
-    path: '/dashboard/ai/knowledge',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-const AuthenticatedDashboardAiPromptsRoute =
-  AuthenticatedDashboardAiPromptsRouteImport.update({
-    id: '/dashboard/ai/prompts',
-    path: '/dashboard/ai/prompts',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-const AuthenticatedDashboardAiUsageRoute =
-  AuthenticatedDashboardAiUsageRouteImport.update({
-    id: '/dashboard/ai/usage',
-    path: '/dashboard/ai/usage',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-const AuthenticatedDashboardAiVoiceRoute =
-  AuthenticatedDashboardAiVoiceRouteImport.update({
-    id: '/dashboard/ai/voice',
-    path: '/dashboard/ai/voice',
+const AuthenticatedPortalProjectsProjectIdRoute =
+  AuthenticatedPortalProjectsProjectIdRouteImport.update({
+    id: '/portal/projects/$projectId',
+    path: '/portal/projects/$projectId',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedDashboardAiWorkflowsRoute =
@@ -190,10 +148,52 @@ const AuthenticatedDashboardAiWorkflowsRoute =
     path: '/dashboard/ai/workflows',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
-const AuthenticatedPortalProjectsProjectIdRoute =
-  AuthenticatedPortalProjectsProjectIdRouteImport.update({
-    id: '/portal/projects/$projectId',
-    path: '/portal/projects/$projectId',
+const AuthenticatedDashboardAiVoiceRoute =
+  AuthenticatedDashboardAiVoiceRouteImport.update({
+    id: '/dashboard/ai/voice',
+    path: '/dashboard/ai/voice',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedDashboardAiUsageRoute =
+  AuthenticatedDashboardAiUsageRouteImport.update({
+    id: '/dashboard/ai/usage',
+    path: '/dashboard/ai/usage',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedDashboardAiPromptsRoute =
+  AuthenticatedDashboardAiPromptsRouteImport.update({
+    id: '/dashboard/ai/prompts',
+    path: '/dashboard/ai/prompts',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedDashboardAiKnowledgeRoute =
+  AuthenticatedDashboardAiKnowledgeRouteImport.update({
+    id: '/dashboard/ai/knowledge',
+    path: '/dashboard/ai/knowledge',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedDashboardAiChatbotsRoute =
+  AuthenticatedDashboardAiChatbotsRouteImport.update({
+    id: '/dashboard/ai/chatbots',
+    path: '/dashboard/ai/chatbots',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedDashboardAiAssistantsRoute =
+  AuthenticatedDashboardAiAssistantsRouteImport.update({
+    id: '/dashboard/ai/assistants',
+    path: '/dashboard/ai/assistants',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedDashboardAiActivityRoute =
+  AuthenticatedDashboardAiActivityRouteImport.update({
+    id: '/dashboard/ai/activity',
+    path: '/dashboard/ai/activity',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedAdminLeadLeadIdRoute =
+  AuthenticatedAdminLeadLeadIdRouteImport.update({
+    id: '/admin/lead/$leadId',
+    path: '/admin/lead/$leadId',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 
@@ -401,81 +401,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated': {
-      id: '/_authenticated'
-      path: ''
-      fullPath: '/'
-      preLoaderRoute: typeof AuthenticatedRouteRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/about': {
-      id: '/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof AboutRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/auth': {
-      id: '/auth'
-      path: '/auth'
-      fullPath: '/auth'
-      preLoaderRoute: typeof AuthRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/blog': {
-      id: '/blog'
-      path: '/blog'
-      fullPath: '/blog'
-      preLoaderRoute: typeof BlogRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/book': {
-      id: '/book'
-      path: '/book'
-      fullPath: '/book'
-      preLoaderRoute: typeof BookRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/case-studies': {
-      id: '/case-studies'
-      path: '/case-studies'
-      fullPath: '/case-studies'
-      preLoaderRoute: typeof CaseStudiesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/contact': {
-      id: '/contact'
-      path: '/contact'
-      fullPath: '/contact'
-      preLoaderRoute: typeof ContactRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/industries': {
-      id: '/industries'
-      path: '/industries'
-      fullPath: '/industries'
-      preLoaderRoute: typeof IndustriesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/pricing': {
-      id: '/pricing'
-      path: '/pricing'
-      fullPath: '/pricing'
-      preLoaderRoute: typeof PricingRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/reset-password': {
-      id: '/reset-password'
-      path: '/reset-password'
-      fullPath: '/reset-password'
-      preLoaderRoute: typeof ResetPasswordRouteImport
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/services': {
@@ -485,11 +415,81 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/sitemap.xml': {
-      id: '/sitemap.xml'
-      path: '/sitemap.xml'
-      fullPath: '/sitemap.xml'
-      preLoaderRoute: typeof SitemapDotxmlRouteImport
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pricing': {
+      id: '/pricing'
+      path: '/pricing'
+      fullPath: '/pricing'
+      preLoaderRoute: typeof PricingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/industries': {
+      id: '/industries'
+      path: '/industries'
+      fullPath: '/industries'
+      preLoaderRoute: typeof IndustriesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/case-studies': {
+      id: '/case-studies'
+      path: '/case-studies'
+      fullPath: '/case-studies'
+      preLoaderRoute: typeof CaseStudiesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/book': {
+      id: '/book'
+      path: '/book'
+      fullPath: '/book'
+      preLoaderRoute: typeof BookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog': {
+      id: '/blog'
+      path: '/blog'
+      fullPath: '/blog'
+      preLoaderRoute: typeof BlogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/case-studies/$slug': {
@@ -498,20 +498,6 @@ declare module '@tanstack/react-router' {
       fullPath: '/case-studies/$slug'
       preLoaderRoute: typeof CaseStudiesSlugRouteImport
       parentRoute: typeof CaseStudiesRoute
-    }
-    '/_authenticated/admin/crm': {
-      id: '/_authenticated/admin/crm'
-      path: '/admin/crm'
-      fullPath: '/admin/crm'
-      preLoaderRoute: typeof AuthenticatedAdminCrmRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/admin/leads': {
-      id: '/_authenticated/admin/leads'
-      path: '/admin/leads'
-      fullPath: '/admin/leads'
-      preLoaderRoute: typeof AuthenticatedAdminLeadsRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/portal/': {
       id: '/_authenticated/portal/'
@@ -527,11 +513,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedPortalDocumentsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/admin/lead/$leadId': {
-      id: '/_authenticated/admin/lead/$leadId'
-      path: '/admin/lead/$leadId'
-      fullPath: '/admin/lead/$leadId'
-      preLoaderRoute: typeof AuthenticatedAdminLeadLeadIdRouteImport
+    '/_authenticated/admin/leads': {
+      id: '/_authenticated/admin/leads'
+      path: '/admin/leads'
+      fullPath: '/admin/leads'
+      preLoaderRoute: typeof AuthenticatedAdminLeadsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/admin/crm': {
+      id: '/_authenticated/admin/crm'
+      path: '/admin/crm'
+      fullPath: '/admin/crm'
+      preLoaderRoute: typeof AuthenticatedAdminCrmRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/dashboard/ai/': {
@@ -541,53 +534,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardAiIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/dashboard/ai/activity': {
-      id: '/_authenticated/dashboard/ai/activity'
-      path: '/dashboard/ai/activity'
-      fullPath: '/dashboard/ai/activity'
-      preLoaderRoute: typeof AuthenticatedDashboardAiActivityRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/dashboard/ai/assistants': {
-      id: '/_authenticated/dashboard/ai/assistants'
-      path: '/dashboard/ai/assistants'
-      fullPath: '/dashboard/ai/assistants'
-      preLoaderRoute: typeof AuthenticatedDashboardAiAssistantsRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/dashboard/ai/chatbots': {
-      id: '/_authenticated/dashboard/ai/chatbots'
-      path: '/dashboard/ai/chatbots'
-      fullPath: '/dashboard/ai/chatbots'
-      preLoaderRoute: typeof AuthenticatedDashboardAiChatbotsRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/dashboard/ai/knowledge': {
-      id: '/_authenticated/dashboard/ai/knowledge'
-      path: '/dashboard/ai/knowledge'
-      fullPath: '/dashboard/ai/knowledge'
-      preLoaderRoute: typeof AuthenticatedDashboardAiKnowledgeRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/dashboard/ai/prompts': {
-      id: '/_authenticated/dashboard/ai/prompts'
-      path: '/dashboard/ai/prompts'
-      fullPath: '/dashboard/ai/prompts'
-      preLoaderRoute: typeof AuthenticatedDashboardAiPromptsRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/dashboard/ai/usage': {
-      id: '/_authenticated/dashboard/ai/usage'
-      path: '/dashboard/ai/usage'
-      fullPath: '/dashboard/ai/usage'
-      preLoaderRoute: typeof AuthenticatedDashboardAiUsageRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/dashboard/ai/voice': {
-      id: '/_authenticated/dashboard/ai/voice'
-      path: '/dashboard/ai/voice'
-      fullPath: '/dashboard/ai/voice'
-      preLoaderRoute: typeof AuthenticatedDashboardAiVoiceRouteImport
+    '/_authenticated/portal/projects/$projectId': {
+      id: '/_authenticated/portal/projects/$projectId'
+      path: '/portal/projects/$projectId'
+      fullPath: '/portal/projects/$projectId'
+      preLoaderRoute: typeof AuthenticatedPortalProjectsProjectIdRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/dashboard/ai/workflows': {
@@ -597,11 +548,60 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardAiWorkflowsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/portal/projects/$projectId': {
-      id: '/_authenticated/portal/projects/$projectId'
-      path: '/portal/projects/$projectId'
-      fullPath: '/portal/projects/$projectId'
-      preLoaderRoute: typeof AuthenticatedPortalProjectsProjectIdRouteImport
+    '/_authenticated/dashboard/ai/voice': {
+      id: '/_authenticated/dashboard/ai/voice'
+      path: '/dashboard/ai/voice'
+      fullPath: '/dashboard/ai/voice'
+      preLoaderRoute: typeof AuthenticatedDashboardAiVoiceRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/dashboard/ai/usage': {
+      id: '/_authenticated/dashboard/ai/usage'
+      path: '/dashboard/ai/usage'
+      fullPath: '/dashboard/ai/usage'
+      preLoaderRoute: typeof AuthenticatedDashboardAiUsageRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/dashboard/ai/prompts': {
+      id: '/_authenticated/dashboard/ai/prompts'
+      path: '/dashboard/ai/prompts'
+      fullPath: '/dashboard/ai/prompts'
+      preLoaderRoute: typeof AuthenticatedDashboardAiPromptsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/dashboard/ai/knowledge': {
+      id: '/_authenticated/dashboard/ai/knowledge'
+      path: '/dashboard/ai/knowledge'
+      fullPath: '/dashboard/ai/knowledge'
+      preLoaderRoute: typeof AuthenticatedDashboardAiKnowledgeRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/dashboard/ai/chatbots': {
+      id: '/_authenticated/dashboard/ai/chatbots'
+      path: '/dashboard/ai/chatbots'
+      fullPath: '/dashboard/ai/chatbots'
+      preLoaderRoute: typeof AuthenticatedDashboardAiChatbotsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/dashboard/ai/assistants': {
+      id: '/_authenticated/dashboard/ai/assistants'
+      path: '/dashboard/ai/assistants'
+      fullPath: '/dashboard/ai/assistants'
+      preLoaderRoute: typeof AuthenticatedDashboardAiAssistantsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/dashboard/ai/activity': {
+      id: '/_authenticated/dashboard/ai/activity'
+      path: '/dashboard/ai/activity'
+      fullPath: '/dashboard/ai/activity'
+      preLoaderRoute: typeof AuthenticatedDashboardAiActivityRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/admin/lead/$leadId': {
+      id: '/_authenticated/admin/lead/$leadId'
+      path: '/admin/lead/$leadId'
+      fullPath: '/admin/lead/$leadId'
+      preLoaderRoute: typeof AuthenticatedAdminLeadLeadIdRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
   }
