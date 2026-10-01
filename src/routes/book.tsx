@@ -7,7 +7,6 @@ import { BookingSuccessModal } from "@/components/booking-success-modal";
 import { SlotPicker } from "@/components/slot-picker";
 import { submitLead } from "@/lib/leads.functions";
 import { bookDiscoveryCall, type BookedCall } from "@/lib/calcom.functions";
-import { dispatchLeadEmails } from "@/lib/lead-notifications.server";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -124,7 +123,7 @@ function BookPage() {
         },
       });
 
-      const leadResult = await submitRequest({
+      await submitRequest({
         data: {
           fullName: form.fullName.trim(),
           companyName: form.companyName.trim(),
@@ -133,30 +132,14 @@ function BookPage() {
           country: form.country.trim(),
           service: form.service.trim(),
           projectDescription: form.projectDescription.trim(),
+          appointment: {
+            startsAt: confirmed.start,
+            endsAt: confirmed.end,
+            meetingUrl: confirmed.meetingUrl,
+            bookingUid: confirmed.uid,
+          },
         },
       });
-
-      const notificationResult = await (async () => {
-        try {
-          return await dispatchLeadEmails(
-            leadResult.lead,
-            0,
-            {
-              startsAt: confirmed.start,
-              endsAt: confirmed.end,
-              meetingUrl: confirmed.meetingUrl,
-              bookingUid: confirmed.uid,
-            },
-          );
-        } catch (err) {
-          console.error("[booking] notification dispatch failed", err);
-          return { customer: false, owner: false };
-        }
-      })();
-
-      if (!notificationResult.customer || !notificationResult.owner) {
-        console.warn("[booking] appointment confirmed but one or more emails were not delivered");
-      }
 
       setBooking(confirmed);
       setSlot(null);
