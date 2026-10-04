@@ -52,9 +52,11 @@ export function BookingSuccessModal({ open, onOpenChange, booking }: Props) {
       <DialogContent className="animate-scale-in max-w-lg overflow-hidden rounded-2xl p-0 text-center">
         <div className="bg-brand-soft px-8 pt-9 pb-7">
           <span className="mx-auto inline-flex size-14 items-center justify-center rounded-full bg-accent/20 text-accent"><PartyPopper className="size-7" /></span>
-          <DialogTitle className="mt-4 text-2xl font-bold text-balance">🎉 Appointment Confirmed</DialogTitle>
+          <DialogTitle className="mt-4 text-2xl font-bold text-balance">{booking ? "🎉 Appointment Confirmed" : "🎉 Request Received"}</DialogTitle>
           <DialogDescription className="mt-3 text-sm leading-relaxed text-muted-foreground">
-            Your appointment is booked successfully. A confirmation has been sent to your email, and our team has been notified at sales.leadforgeai@gmail.com.
+            {booking
+              ? "Your appointment is booked. The confirmed time and meeting details are below."
+              : "Your consultation request has been recorded. We’ll follow up about scheduling using the details you provided."}
           </DialogDescription>
         </div>
         <div className="px-8 pt-6 pb-8 text-left">
@@ -70,9 +72,14 @@ export function BookingSuccessModal({ open, onOpenChange, booking }: Props) {
           )}
           <p className="mt-5 text-xs font-semibold tracking-wide text-muted-foreground uppercase">Next steps</p>
           <ul className="mt-3 space-y-2.5 text-sm">
-            <li>✅ Check your email for the booking confirmation.</li>
-            <li>✅ Save the appointment to your calendar.</li>
-            <li>✅ Join using the meeting link at the scheduled time.</li>
+            {booking ? (
+              <>
+                <li>✅ Save the appointment to your calendar.</li>
+                <li>✅ Join using the meeting link at the scheduled time.</li>
+              </>
+            ) : (
+              <li>✅ We’ll follow up to arrange a suitable time.</li>
+            )}
           </ul>
           <div className="mt-7 flex flex-col gap-3 sm:flex-row">
             <Button asChild size="lg" className="flex-1 rounded-full"><Link to="/" onClick={() => onOpenChange(false)}><Home className="size-4" /> Return Home</Link></Button>
