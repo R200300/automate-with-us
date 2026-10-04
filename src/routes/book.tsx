@@ -104,24 +104,26 @@ function BookPage() {
     setFieldErrors(errors);
     setSlotError(null);
     if (Object.keys(errors).length > 0) return;
-    if (!slot) {
-      setSlotError("Please pick a time for your call.");
-      return;
-    }
-
     setSubmitting(true);
     setError(null);
     try {
-      const confirmed = await confirmCall({
-        data: {
-          start: slot,
-          name: form.fullName.trim(),
-          email: form.email.trim(),
-          timeZone,
-          phone: form.phone.trim(),
-          notes: `${form.companyName.trim()} · ${form.service.trim()} · ${form.country.trim()}\n\n${form.projectDescription.trim()}`,
-        },
-      });
+      let confirmed: BookedCall | null = null;
+      if (slot) {
+        try {
+          confirmed = await confirmCall({
+            data: {
+              start: slot,
+              name: form.fullName.trim(),
+              email: form.email.trim(),
+              timeZone,
+              phone: form.phone.trim(),
+              notes: `${form.companyName.trim()} · ${form.service.trim()} · ${form.country.trim()}\n\n${form.projectDescription.trim()}`,
+            },
+          });
+        } catch {
+          // Keep the consultation request even if the calendar cannot confirm the selected time.
+        }
+      }
 
       await submitRequest({
         data: {
@@ -132,12 +134,14 @@ function BookPage() {
           country: form.country.trim(),
           service: form.service.trim(),
           projectDescription: form.projectDescription.trim(),
-          appointment: {
-            startsAt: confirmed.start,
-            endsAt: confirmed.end,
-            meetingUrl: confirmed.meetingUrl,
-            bookingUid: confirmed.uid,
-          },
+          ...(confirmed ? {
+            appointment: {
+              startsAt: confirmed.start,
+              endsAt: confirmed.end,
+              meetingUrl: confirmed.meetingUrl,
+              bookingUid: confirmed.uid,
+            },
+          } : {}),
         },
       });
 
@@ -192,7 +196,7 @@ function BookPage() {
 
           <form className="surface-card p-8" onSubmit={handleSubmit} noValidate>
             <h2 className="text-xl font-semibold">Book your consultation</h2>
-            <p className="mt-1.5 text-sm text-muted-foreground">Select an available time, then submit your details. Your appointment is confirmed immediately after successful booking.</p>
+            <p className="mt-1.5 text-sm text-muted-foreground">Choose an available time if you can, or send your details without one and we’ll follow up about scheduling.</p>
             <div className="mt-6">
               <SlotPicker value={slot} onChange={setSlot} timeZone={timeZone} />
               {slotError && <p className="mt-2 text-xs text-destructive">{slotError}</p>}
@@ -207,9 +211,9 @@ function BookPage() {
               <div className="grid gap-2 sm:col-span-2"><Label htmlFor="b-notes">Project description *</Label><Textarea id="b-notes" rows={4} placeholder="We get about 60 calls a week and miss a third of them..." value={form.projectDescription} aria-invalid={Boolean(fieldErrors.projectDescription)} onChange={(e) => setForm((p) => ({...p, projectDescription:e.target.value}))}/>{fieldError("projectDescription")}</div>
             </div>
             <Button type="submit" size="lg" className="mt-6 w-full rounded-full" disabled={submitting}>
-              {submitting ? <><Loader2 className="size-4 animate-spin" /> Booking your consultation...</> : "Confirm My Appointment"}
+              {submitting ? <><Loader2 className="size-4 animate-spin" /> Sending your request...</> : slot ? "Confirm My Appointment" : "Send Consultation Request"}
             </Button>
-            <p className="mt-3 text-center text-xs text-muted-foreground">Free · No obligation · Confirmation is emailed after booking</p>
+            <p className="mt-3 text-center text-xs text-muted-foreground">Free · No obligation</p>
           </form>
         </div>
       </section>

@@ -28,7 +28,7 @@ export function SlotPicker({ value, onChange, timeZone }: Props) {
         setActiveDate(result[0]?.date ?? null);
       })
       .catch(() => {
-        if (!cancelled) setError("We couldn't load live times right now. Submit the form and we'll email you options.");
+        setError("Live times are temporarily unavailable. You can still send your request without choosing a time.");
       })
       .finally(() => {
         if (!cancelled) setLoading(false);
@@ -60,7 +60,7 @@ export function SlotPicker({ value, onChange, timeZone }: Props) {
   if (error || days.length === 0)
     return (
       <p className="rounded-xl border border-border bg-muted/40 px-4 py-4 text-xs text-muted-foreground">
-        {error ?? "No open times in the next two weeks. Submit the form and we'll email you options."}
+        {error ?? "No open times are available right now. You can still send your request without choosing a time."}
       </p>
     );
 
